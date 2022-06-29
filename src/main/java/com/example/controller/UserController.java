@@ -1,6 +1,10 @@
 package com.example.controller;
 
+import com.example.domain.dto.user.UserPostRequest;
+import com.example.domain.dto.user.UserResponse;
+import com.example.domain.mapper.UserMapper;
 import com.example.domain.model.User;
+import com.example.domain.repository.UserRepository;
 import com.example.domain.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,24 +14,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/users")
 @CrossOrigin("*")
 public class UserController {
 
-    @Autowired
-    private UserService service;
+    private final UserService service;
+    private final UserRepository userRepository;
 
-    @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user){
-        User salvar = service.saveUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(salvar);
+    @Autowired
+    public UserController(UserService service, UserRepository userRepository) {
+        this.service = service;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll(){
-        return ResponseEntity.status(HttpStatus.OK).body(service.listAll());
+    public ResponseEntity<List<UserResponse>> findAll(){
+        List<UserResponse> users = userRepository.findAll().stream().map(UserMapper::toUserResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(users);
     }
 
     @GetMapping("/{id}")
@@ -40,5 +47,14 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(user.get());
     }
+
+    @PostMapping
+    public ResponseEntity<UserResponse> save(@RequestBody UserPostRequest request){
+        User user = UserMapper.toUser(request);
+        User userSave = service.saveUser(user);
+        UserResponse userResponse = UserMapper.toUserResponse(userSave);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
+    }
+
 
 }
