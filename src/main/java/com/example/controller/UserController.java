@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -49,11 +50,16 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> save(@RequestBody UserPostRequest request){
+    public ResponseEntity<UserResponse> save(@Valid @RequestBody UserPostRequest request){
         User user = UserMapper.toUser(request);
         User userSave = service.saveUser(user);
         UserResponse userResponse = UserMapper.toUserResponse(userSave);
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
+    }
+
+    public ResponseEntity<Void> delete(@PathVariable UUID id){
+        service.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 

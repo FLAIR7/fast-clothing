@@ -23,18 +23,11 @@ public class Orders {
     @Type(
             type = "uuid-char"
     )
-    @ColumnDefault("random_uuid()")
+//    @ColumnDefault("random_uuid()")
     public UUID ordersId;
 
-//    @ManyToOne(
-//            cascade = CascadeType.MERGE
-//    )
-//    @JoinColumn(
-//            name = "productId"
-//    )
-//    private Product products;
-
     @OneToMany(
+            cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )
     private List<Product> products;
@@ -61,12 +54,6 @@ public class Orders {
         this.user = user;
         this.paymentMethod = paymentMethod;
     }
-
-    //    public Orders(Product products, User user, Payment paymentMethod) {
-//        this.products = products;
-//        this.user = user;
-//        this.paymentMethod = paymentMethod;
-//    }
 
     public UUID getOrdersId() {
         return ordersId;

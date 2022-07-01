@@ -1,11 +1,17 @@
 package com.example.domain.dto.user;
 
-import javax.persistence.Column;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class UserPostRequest {
-
+    @NotBlank(message = "Email is required")
+    @Email
+    @NotNull
     private String email;
+    @NotBlank(message = "Password is required")
+    @Size(min = 8, max = 25)
     @NotNull
     private String password;
 

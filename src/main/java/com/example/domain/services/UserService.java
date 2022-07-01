@@ -1,8 +1,10 @@
 package com.example.domain.services;
 
+import com.example.Exceptions.NotFoundException;
 import com.example.domain.model.User;
 import com.example.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,9 @@ public class UserService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public User saveUser(User user){
         Optional<User> optUser = repository.findByEmail(user.getEmail());
@@ -29,6 +34,8 @@ public class UserService {
             throw new RuntimeException("Email cadastrado já existe");
         }
 
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         return repository.save(user);
     }
 
@@ -38,5 +45,15 @@ public class UserService {
 
     public Optional<User> listById(UUID id){
         return repository.findById(id);
+    }
+
+    public void delete(UUID id) {
+        Optional<User> optUser = repository.findById(id);
+
+        if(optUser.isEmpty()){
+            throw new NotFoundException("User not found");
+        }
+
+        repository.deleteById(id);
     }
 }

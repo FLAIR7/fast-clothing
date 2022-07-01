@@ -1,6 +1,5 @@
 package com.example.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -23,7 +22,7 @@ public class Category {
     @Type(
             type = "uuid-char"
     )
-    @ColumnDefault("random_uuid()")
+//    @ColumnDefault("random_uuid()")
     private  UUID categoryId;
 
     private  String name;

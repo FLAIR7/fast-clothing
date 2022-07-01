@@ -5,10 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.persistence.criteria.Order;
 import javax.validation.constraints.DecimalMax;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -34,6 +32,7 @@ public class Product {
     private Integer inventoryAmount;
 
     @ManyToOne(
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     @JoinColumn(
