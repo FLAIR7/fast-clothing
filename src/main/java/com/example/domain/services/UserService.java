@@ -23,7 +23,6 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     public User saveUser(User user){
         Optional<User> optUser = repository.findByEmail(user.getEmail());
         boolean exists = false;

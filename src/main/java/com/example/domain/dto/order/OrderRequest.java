@@ -16,7 +16,14 @@ public class OrderRequest {
     @NotNull
     private UUID userId;
 
+    @NotNull
     private Payment method;
+
+    public OrderRequest(List<UUID> productsId, UUID userId, Payment method) {
+        this.productsId = productsId;
+        this.userId = userId;
+        this.method = method;
+    }
 
     public List<UUID> getProducts() {
         return productsId;
@@ -40,5 +47,14 @@ public class OrderRequest {
 
     public void setMethod(Payment method) {
         this.method = method;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderRequest{" +
+                "productsId=" + productsId +
+                ", userId=" + userId +
+                ", method=" + method +
+                '}';
     }
 }

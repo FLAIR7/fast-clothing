@@ -1,7 +1,5 @@
 package com.example.domain.dto.product;
 
-import com.example.domain.model.Category;
-
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -15,18 +13,15 @@ public class ProductResponse {
 
     private Integer quantity;
 
-    private Category category;
-
     public ProductResponse() {
 
     }
 
-    public ProductResponse(UUID productId, String name, BigDecimal price, Integer quantity, Category category) {
+    public ProductResponse(UUID productId, String name, BigDecimal price, Integer quantity) {
         this.productId = productId;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.category = category;
     }
 
     public UUID getProductId() {
@@ -61,14 +56,6 @@ public class ProductResponse {
         this.quantity = quantity;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     @Override
     public String toString() {
         return "ProductResponse{" +
@@ -76,7 +63,6 @@ public class ProductResponse {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
-                ", category=" + category +
                 '}';
     }
 }

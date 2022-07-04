@@ -44,15 +44,6 @@ public class OrderService {
             throw new NotFoundException("User does not exist");
         }
 
-        List<UUID> allProducts = productRepository.getAllIds();
-        List<UUID> productOrder = orders
-                .getProducts()
-                .stream()
-                .map(Product::getProductId)
-                .collect(Collectors.toList());
-
-        orders.setUser(optUser.get());
-
         return orderRepository.save(orders);
     }
 

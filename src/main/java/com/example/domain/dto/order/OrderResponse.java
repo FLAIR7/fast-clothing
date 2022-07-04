@@ -7,18 +7,27 @@ import java.util.UUID;
 
 public class OrderResponse {
 
-    private UUID orderId;
+    private UUID ordersId;
 
     private List<Product> products;
 
     private UserResponse user;
 
-    public UUID getOrderId() {
-        return orderId;
+    public OrderResponse() {
     }
 
-    public void setOrderId(UUID orderId) {
-        this.orderId = orderId;
+    public OrderResponse(UUID ordersId, List<Product> products, UserResponse user) {
+        this.ordersId = ordersId;
+        this.products = products;
+        this.user = user;
+    }
+
+    public UUID getOrdersId() {
+        return ordersId;
+    }
+
+    public void setOrderId(UUID ordersId) {
+        this.ordersId = ordersId;
     }
 
     public List<Product> getProducts() {
@@ -35,5 +44,14 @@ public class OrderResponse {
 
     public void setUser(UserResponse user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderResponse{" +
+                "orderId=" + ordersId +
+                ", products=" + products +
+                ", user=" + user +
+                '}';
     }
 }

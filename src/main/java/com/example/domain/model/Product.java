@@ -31,17 +31,6 @@ public class Product {
 
     private Integer quantity;
 
-    @ManyToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    @JoinColumn(
-            name = "category_id",
-            referencedColumnName = "categoryId"
-    )
-    @JsonIgnore
-    private Category category;
-
     public Product(){
 
     }
@@ -87,13 +76,6 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 
     @Override
     public String toString() {

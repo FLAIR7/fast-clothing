@@ -33,7 +33,7 @@ public class Orders {
     private List<Product> products;
 
     @ManyToOne(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.MERGE
     )
     @JoinColumn(
             name = "userId"
