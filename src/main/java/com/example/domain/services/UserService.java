@@ -14,11 +14,15 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository repository;
+    private final UserRepository repository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public UserService(UserRepository repository, PasswordEncoder passwordEncoder){
+        this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
 
     public User saveUser(User user){
         Optional<User> optUser = repository.findByEmail(user.getEmail());

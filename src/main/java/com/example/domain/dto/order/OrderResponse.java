@@ -1,8 +1,7 @@
 package com.example.domain.dto.order;
 
+import com.example.domain.dto.user.UserResponse;
 import com.example.domain.model.Product;
-import com.example.domain.model.User;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -12,7 +11,7 @@ public class OrderResponse {
 
     private List<Product> products;
 
-    private User user;
+    private UserResponse user;
 
     public UUID getOrderId() {
         return orderId;
@@ -30,11 +29,11 @@ public class OrderResponse {
         this.products = products;
     }
 
-    public User getUser() {
+    public UserResponse getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserResponse user) {
         this.user = user;
     }
 }

@@ -12,7 +12,6 @@ public class UserMapper {
     }
 
     public static UserResponse toUserResponse(User user){
-            return new ModelMapper().map(user, UserResponse.class);
+        return new ModelMapper().map(user, UserResponse.class);
     }
-
 }

@@ -1,30 +1,52 @@
 package com.example.controller;
 
-import com.example.domain.model.Category;
+import com.example.domain.dto.product.ProductRequest;
+import com.example.domain.dto.product.ProductResponse;
+import com.example.domain.mapper.ProductMapper;
 import com.example.domain.model.Product;
 import com.example.domain.repository.ProductRepository;
+import com.example.domain.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/products")
 @CrossOrigin("*")
 public class ProductController {
 
+    private final ProductRepository repository;
+
+    private final ProductService service;
+
     @Autowired
-    private ProductRepository repository;
+    public ProductController(ProductRepository repository, ProductService service){
+        this.repository = repository;
+        this.service = service;
+    }
 
     @GetMapping
-    public String getAllProducts(){
-        Product product = new Product("TV", BigDecimal.valueOf(1500), 5);
-        Category category = new Category("Eletronicos");
-        product.setCategory(category);
-        repository.save(product);
-        return "Hello, World";
+    public ResponseEntity<List<ProductResponse>> findAll(){
+        List<ProductResponse> response = repository
+                .findAll()
+                .stream()
+                .map(ProductMapper::toProductResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @PostMapping
+    public ResponseEntity<ProductResponse> save(@Valid @RequestBody ProductRequest request){
+        Product product = ProductMapper.toProduct(request);
+        Product productSaved = service.saveProduct(product);
+        ProductResponse response = ProductMapper.toProductResponse(productSaved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
 }

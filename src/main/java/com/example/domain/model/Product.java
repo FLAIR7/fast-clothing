@@ -22,14 +22,14 @@ public class Product {
     @Type(
             type = "uuid-char"
     )
-    @Column(name = "product_id")
+//    @Column(name = "product_id")
     private UUID productId;
     private String name;
 
     @DecimalMax("999999")
     private BigDecimal price;
 
-    private Integer inventoryAmount;
+    private Integer quantity;
 
     @ManyToOne(
             cascade = CascadeType.ALL,
@@ -49,26 +49,42 @@ public class Product {
     public Product(
                    String name,
                    BigDecimal price,
-                   Integer inventoryAmount) {
+                   Integer quantity) {
         this.name = name;
         this.price= price;
-        this.inventoryAmount = inventoryAmount;
+        this.quantity = quantity;
     }
 
     public UUID getProductId() {
         return productId;
     }
 
+    public void setProductId(UUID productId) {
+        this.productId = productId;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public Integer getInventoryAmount() {
-        return inventoryAmount;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Category getCategory() {
@@ -79,13 +95,12 @@ public class Product {
         this.category = category;
     }
 
-
     @Override
     public String toString() {
         return "Product{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                ", inventoryAmount=" + inventoryAmount +
+                ", quantity=" + quantity +
                 '}';
     }
 }
