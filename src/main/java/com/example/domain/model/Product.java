@@ -6,6 +6,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ public class Product {
     )
 //    @Column(name = "product_id")
     private UUID productId;
+    @NotBlank
     private String name;
 
     @DecimalMax("999999")
@@ -75,7 +77,6 @@ public class Product {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-
 
     @Override
     public String toString() {

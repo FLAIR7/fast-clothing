@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/users")
-@CrossOrigin("*")
 public class UserController {
 
     private final UserService service;
@@ -39,14 +38,15 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable UUID id){
+    public ResponseEntity<UserResponse> findById(@PathVariable UUID id){
         Optional<User> user = service.listById(id);
 
         if(user.isEmpty()){
             return ResponseEntity.notFound().build();
         }
+        UserResponse response = UserMapper.toUserResponse(user.get());
 
-        return ResponseEntity.status(HttpStatus.OK).body(user.get());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping
@@ -57,10 +57,10 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
     }
 
+    @DeleteMapping
     public ResponseEntity<Void> delete(@PathVariable UUID id){
         service.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
 
 }

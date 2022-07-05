@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 import java.util.UUID;
@@ -24,17 +25,18 @@ public class User {
     )
 //    @ColumnDefault("random_uuid()")
     public UUID userId;
+    @NotBlank
     private String email;
-
+    @NotBlank
     private String password;
+
+    public User(){
+
+    }
 
     public User(String email, String password){
         this.email = email;
         this.password = password;
-    }
-
-    public User(){
-
     }
 
     public UUID getUserId() {
