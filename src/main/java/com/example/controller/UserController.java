@@ -39,7 +39,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> findById(@PathVariable UUID id){
-        Optional<User> user = service.listById(id);
+        Optional<User> user = service.findById(id);
 
         if(user.isEmpty()){
             return ResponseEntity.notFound().build();
@@ -57,9 +57,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id){
-        service.delete(id);
+        service.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

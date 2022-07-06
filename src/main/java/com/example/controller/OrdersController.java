@@ -1,23 +1,20 @@
 package com.example.controller;
 
-import com.example.domain.dto.order.OrderRequest;
-import com.example.domain.dto.order.OrderResponse;
-import com.example.domain.mapper.OrderMapper;
+import com.example.domain.dto.order.OrdersRequest;
+import com.example.domain.dto.order.OrdersResponse;
+import com.example.domain.mapper.OrdersMapper;
 import com.example.domain.model.*;
 import com.example.domain.repository.OrdersRepository;
 import com.example.domain.repository.ProductRepository;
 import com.example.domain.repository.UserRepository;
-import com.example.domain.services.OrderService;
+import com.example.domain.services.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,12 +22,12 @@ import java.util.stream.Collectors;
 public class OrdersController {
 
     private final OrdersRepository repository;
-    private final OrderService service;
+    private final OrdersService service;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
     @Autowired
-    public OrdersController(OrdersRepository repository, OrderService service,
+    public OrdersController(OrdersRepository repository, OrdersService service,
                             ProductRepository productRepository,
                             UserRepository userRepository){
         this.repository = repository;
@@ -40,21 +37,21 @@ public class OrdersController {
     }
 
     @GetMapping
-    public ResponseEntity<List<OrderResponse>> findAll(){
-        List<OrderResponse> orders = repository.findAll().stream().map(OrderMapper::toOrderResponse)
+    public ResponseEntity<List<OrdersResponse>> findAll(){
+        List<OrdersResponse> orders = repository.findAll().stream().map(OrdersMapper::toOrderResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(orders);
     }
 
     @PostMapping
-    public ResponseEntity<OrderResponse> save(@Valid @RequestBody OrderRequest request){
+    public ResponseEntity<OrdersResponse> save(@Valid @RequestBody OrdersRequest request){
         List<Product> products = (List<Product>) productRepository.findAllById(request.getProducts());
         User user = userRepository.findById(request.getUserId()).orElse(null);
-        Orders order = OrderMapper.toOrder(request);
+        Orders order = OrdersMapper.toOrder(request);
         order.setProductList(products);
         order.setUser(user);
         Orders orderSaved = service.saveOrder(order);
-        OrderResponse response = OrderMapper.toOrderResponse(orderSaved);
+        OrdersResponse response = OrdersMapper.toOrderResponse(orderSaved);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 

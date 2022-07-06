@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -46,6 +47,16 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public Product(UUID productId,
+            String name,
+            BigDecimal price,
+            Integer quantity) {
+        this.productId = productId;
+        this.name = name;
+        this.price= price;
+        this.quantity = quantity;
+    }
+
     public UUID getProductId() {
         return productId;
     }
@@ -76,6 +87,23 @@ public class Product {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public void increaseInventoryAmount(Integer value){
+        this.quantity += value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return productId.equals(product.productId) && name.equals(product.name) && price.equals(product.price) && quantity.equals(product.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId, name, price, quantity);
     }
 
     @Override

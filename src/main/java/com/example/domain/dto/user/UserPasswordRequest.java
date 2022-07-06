@@ -1,31 +1,32 @@
 package com.example.domain.dto.user;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.UUID;
 
-public class UserPostRequest {
-    @NotBlank(message = "Email is required")
-    @Email(message = "This doesnt look like an email")
-    @NotNull
-    private String email;
+public class UserPasswordRequest {
+
+    private UUID userId;
+
     @NotBlank(message = "Password is required")
     @Size(min = 8, max = 25)
-    @NotNull
     private String password;
 
-    public UserPostRequest(String email, String password) {
-        this.email = email;
+    public UserPasswordRequest(){
+
+    }
+
+    public UserPasswordRequest(UUID userId, String password) {
+        this.userId = userId;
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public UUID getUserId() {
+        return userId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {
@@ -38,8 +39,8 @@ public class UserPostRequest {
 
     @Override
     public String toString() {
-        return "UserPostRequest{" +
-                "email='" + email + '\'' +
+        return "UserPasswordRequest{" +
+                "userId=" + userId +
                 ", password='" + password + '\'' +
                 '}';
     }

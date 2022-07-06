@@ -2,6 +2,8 @@ package com.example.security;
 
 import com.example.security.handlers.AcessDeniedException;
 import com.example.security.handlers.UnauthorizedException;
+import com.example.security.jwt.JwtAuthenticationFilterConfig;
+import com.example.security.jwt.JwtAuthorizationFilterConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

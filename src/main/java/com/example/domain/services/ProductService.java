@@ -21,4 +21,9 @@ public class ProductService {
         return repository.save(product);
     }
 
+    public Product increaseInventoryAmount(Product product, Integer inventoryAmount){
+        product.increaseInventoryAmount(inventoryAmount);
+        return repository.save(product);
+    }
+
 }
