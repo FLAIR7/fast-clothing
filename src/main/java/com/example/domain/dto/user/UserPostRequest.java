@@ -4,6 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 public class UserPostRequest {
     @NotBlank(message = "Email is required")
@@ -15,6 +16,9 @@ public class UserPostRequest {
     @NotNull
     private String password;
 
+    public UserPostRequest(){
+
+    }
     public UserPostRequest(String email, String password) {
         this.email = email;
         this.password = password;
@@ -34,6 +38,19 @@ public class UserPostRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserPostRequest that = (UserPostRequest) o;
+        return email.equals(that.email) && password.equals(that.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, password);
     }
 
     @Override

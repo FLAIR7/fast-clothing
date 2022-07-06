@@ -1,5 +1,6 @@
 package com.example.domain.dto.user;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class UserResponse {
@@ -30,6 +31,19 @@ public class UserResponse {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserResponse that = (UserResponse) o;
+        return userId.equals(that.userId) && email.equals(that.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, email);
     }
 
     @Override

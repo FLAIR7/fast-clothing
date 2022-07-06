@@ -3,6 +3,7 @@ package com.example.domain.dto.order;
 import com.example.domain.dto.user.UserResponse;
 import com.example.domain.model.Product;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class OrdersResponse {
@@ -44,6 +45,19 @@ public class OrdersResponse {
 
     public void setUser(UserResponse user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrdersResponse that = (OrdersResponse) o;
+        return ordersId.equals(that.ordersId) && products.equals(that.products) && user.equals(that.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ordersId, products, user);
     }
 
     @Override

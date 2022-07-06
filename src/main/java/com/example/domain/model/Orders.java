@@ -8,6 +8,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -81,6 +82,19 @@ public class Orders {
 
     public void setPaymentMethod(Payment paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Orders orders = (Orders) o;
+        return ordersId.equals(orders.ordersId) && products.equals(orders.products) && user.equals(orders.user) && paymentMethod == orders.paymentMethod && timestamp.equals(orders.timestamp);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ordersId, products, user, paymentMethod, timestamp);
     }
 
     @Override

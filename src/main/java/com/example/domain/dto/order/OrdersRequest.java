@@ -4,6 +4,7 @@ import com.example.domain.model.Payment;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class OrdersRequest {
@@ -45,6 +46,19 @@ public class OrdersRequest {
 
     public void setMethod(Payment method) {
         this.method = method;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrdersRequest that = (OrdersRequest) o;
+        return productsId.equals(that.productsId) && userId.equals(that.userId) && method == that.method;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productsId, userId, method);
     }
 
     @Override

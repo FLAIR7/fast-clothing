@@ -3,6 +3,7 @@ package com.example.domain.dto.product;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.UUID;
 
 public class ProductRequest {
@@ -45,6 +46,19 @@ public class ProductRequest {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductRequest that = (ProductRequest) o;
+        return name.equals(that.name) && price.equals(that.price) && quantity.equals(that.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price, quantity);
     }
 
     @Override

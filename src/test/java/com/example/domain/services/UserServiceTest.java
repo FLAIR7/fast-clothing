@@ -2,7 +2,7 @@ package com.example.domain.services;
 
 import com.example.domain.model.User;
 import com.example.domain.repository.UserRepository;
-import com.example.domain.util.CreateUser;
+import com.example.util.CreateUser;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,6 +61,7 @@ class UserServiceTest {
     @Test
     void deleteById_DeleteUser_WhenSuccessful(){
         Assertions.assertThatCode(() -> service.deleteById(UUID.fromString("c3e4a88f-c2b2-4822-87f0-06fd7cefb0cb"))).doesNotThrowAnyException();
+        Mockito.verify(repository).deleteById(UUID.fromString("c3e4a88f-c2b2-4822-87f0-06fd7cefb0cb"));
     }
 
     @Test

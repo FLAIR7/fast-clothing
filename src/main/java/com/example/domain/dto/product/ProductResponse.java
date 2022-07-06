@@ -1,6 +1,7 @@
 package com.example.domain.dto.product;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.UUID;
 
 public class ProductResponse {
@@ -54,6 +55,19 @@ public class ProductResponse {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductResponse that = (ProductResponse) o;
+        return productId.equals(that.productId) && name.equals(that.name) && price.equals(that.price) && quantity.equals(that.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId, name, price, quantity);
     }
 
     @Override

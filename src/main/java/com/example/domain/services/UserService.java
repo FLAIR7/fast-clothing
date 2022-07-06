@@ -87,6 +87,6 @@ public class UserService implements UserDetailsService {
         }
         User userExpected = this.findById(user.getUserId()).orElse(null);
         userExpected.setPassword(passwordEncoder.encode(userExpected.getPassword()));
-        UserMapper.toUserResponse(this.repository.save(userExpected));
+        repository.save(userExpected);
     }
 }

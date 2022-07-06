@@ -23,7 +23,6 @@ public class User {
     @Type(
             type = "uuid-char"
     )
-//    @ColumnDefault("random_uuid()")
     public UUID userId;
     @NotBlank
     private String email;

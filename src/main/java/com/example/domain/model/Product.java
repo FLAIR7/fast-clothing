@@ -24,7 +24,6 @@ public class Product {
     @Type(
             type = "uuid-char"
     )
-//    @Column(name = "product_id")
     private UUID productId;
     @NotBlank
     private String name;

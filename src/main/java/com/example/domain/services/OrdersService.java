@@ -13,7 +13,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@Transactional
 public class OrdersService {
 
     private final OrdersRepository orderRepository;
