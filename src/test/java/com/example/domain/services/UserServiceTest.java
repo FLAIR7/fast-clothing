@@ -33,8 +33,6 @@ class UserServiceTest {
     @Mock
     PasswordEncoder passwordEncoder;
 
-    public UserServiceTest(){}
-
     @BeforeEach
     void setUp(){
         Mockito.when(repository.save(ArgumentMatchers.any(User.class))).thenReturn(CreateUser.createUserWithId());

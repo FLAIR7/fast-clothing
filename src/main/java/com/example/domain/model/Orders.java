@@ -56,6 +56,13 @@ public class Orders {
         this.paymentMethod = paymentMethod;
     }
 
+    public Orders(UUID ordersId, List<Product> products, User user, Payment paymentMethod) {
+        this.ordersId = ordersId;
+        this.products = products;
+        this.user = user;
+        this.paymentMethod = paymentMethod;
+    }
+
     public UUID getOrdersId() {
         return ordersId;
     }

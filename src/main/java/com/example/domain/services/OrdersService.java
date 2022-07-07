@@ -17,15 +17,15 @@ public class OrdersService {
 
     private final OrdersRepository orderRepository;
     private final UserService userService;
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
     @Autowired
     public OrdersService(OrdersRepository orderRepository,
                          UserService userService,
-                         ProductRepository productRepository){
+                         ProductService productService){
         this.orderRepository = orderRepository;
         this.userService = userService;
-        this.productRepository = productRepository;
+        this.productService = productService;
     }
 
     public Optional<Orders> findById(UUID orderId){
