@@ -24,7 +24,6 @@ public class Orders {
     @Type(
             type = "uuid-char"
     )
-//    @ColumnDefault("random_uuid()")
     public UUID ordersId;
 
     @OneToMany(

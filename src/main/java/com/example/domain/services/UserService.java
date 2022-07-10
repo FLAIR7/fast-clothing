@@ -3,6 +3,7 @@ package com.example.domain.services;
 import com.example.domain.dto.user.UserPasswordRequest;
 import com.example.domain.exceptions.NotFoundException;
 import com.example.domain.mapper.UserMapper;
+import com.example.domain.model.Role;
 import com.example.domain.model.User;
 import com.example.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +14,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Supplier;
 
 @Service
 @Transactional
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
@@ -45,7 +43,8 @@ public class UserService implements UserDetailsService {
         if(exists){
             throw new RuntimeException("Email already in use");
         }
-
+        
+        user.setRoles(Collections.singleton(Role.ADMIN));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return repository.save(user);
@@ -67,17 +66,6 @@ public class UserService implements UserDetailsService {
         }
 
         repository.deleteById(id);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> optUser = repository.findByEmail(email);
-        if(optUser.isEmpty()){
-            throw new UsernameNotFoundException("User does not exist");
-        }
-        User user = optUser.get();
-
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
     }
 
     @Transactional

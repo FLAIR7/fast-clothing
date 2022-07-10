@@ -25,6 +25,7 @@ public class Product {
             type = "uuid-char"
     )
     private UUID productId;
+
     @NotBlank
     private String name;
 
