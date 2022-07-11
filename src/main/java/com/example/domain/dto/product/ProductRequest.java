@@ -53,12 +53,12 @@ public class ProductRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductRequest that = (ProductRequest) o;
-        return name.equals(that.name) && price.equals(that.price) && quantity.equals(that.quantity);
+        return name.equals(that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price, quantity);
+        return Objects.hash(name);
     }
 
     @Override

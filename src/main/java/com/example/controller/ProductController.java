@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,7 +26,8 @@ public class ProductController {
     private final ProductService service;
 
     @Autowired
-    public ProductController(ProductRepository repository, ProductService service){
+    public ProductController(ProductRepository repository,
+                             ProductService service){
         this.repository = repository;
         this.service = service;
     }
@@ -46,6 +48,12 @@ public class ProductController {
         Product productSaved = service.saveProduct(product);
         ProductResponse response = ProductMapper.toProductResponse(productSaved);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID productId){
+        service.deleteById(productId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

@@ -24,6 +24,7 @@ public class Orders {
     @Type(
             type = "uuid-char"
     )
+//    @ColumnDefault("random_uuid()")
     public UUID ordersId;
 
     @OneToMany(
@@ -49,13 +50,18 @@ public class Orders {
 
     }
 
-    public Orders(List<Product> products, User user, Payment paymentMethod) {
+    public Orders(List<Product> products,
+                  User user,
+                  Payment paymentMethod) {
         this.products = products;
         this.user = user;
         this.paymentMethod = paymentMethod;
     }
 
-    public Orders(UUID ordersId, List<Product> products, User user, Payment paymentMethod) {
+    public Orders(UUID ordersId,
+                  List<Product> products,
+                  User user,
+                  Payment paymentMethod) {
         this.ordersId = ordersId;
         this.products = products;
         this.user = user;
@@ -95,12 +101,12 @@ public class Orders {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Orders orders = (Orders) o;
-        return ordersId.equals(orders.ordersId) && products.equals(orders.products) && user.equals(orders.user) && paymentMethod == orders.paymentMethod && timestamp.equals(orders.timestamp);
+        return ordersId.equals(orders.ordersId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ordersId, products, user, paymentMethod, timestamp);
+        return Objects.hash(ordersId);
     }
 
     @Override

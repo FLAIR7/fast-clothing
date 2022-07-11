@@ -98,12 +98,12 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return productId.equals(product.productId) && name.equals(product.name) && price.equals(product.price) && quantity.equals(product.quantity);
+        return productId.equals(product.productId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, name, price, quantity);
+        return Objects.hash(productId);
     }
 
     @Override

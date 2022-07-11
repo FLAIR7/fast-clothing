@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,7 +28,8 @@ public class OrdersController {
     private final UserRepository userRepository;
 
     @Autowired
-    public OrdersController(OrdersRepository repository, OrdersService service,
+    public OrdersController(OrdersRepository repository,
+                            OrdersService service,
                             ProductRepository productRepository,
                             UserRepository userRepository){
         this.repository = repository;
@@ -38,7 +40,10 @@ public class OrdersController {
 
     @GetMapping
     public ResponseEntity<List<OrdersResponse>> findAll(){
-        List<OrdersResponse> orders = repository.findAll().stream().map(OrdersMapper::toOrderResponse)
+        List<OrdersResponse> orders = repository
+                .findAll()
+                .stream()
+                .map(OrdersMapper::toOrderResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(orders);
     }
@@ -53,6 +58,12 @@ public class OrdersController {
         Orders orderSaved = service.saveOrder(order);
         OrdersResponse response = OrdersMapper.toOrderResponse(orderSaved);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID orderId){
+        service.deleteById(orderId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

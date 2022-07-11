@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ServletUtil {
+
     public static void write(HttpServletResponse response, HttpStatus status, String json) throws IOException {
         response.setStatus(status.value());
         response.setCharacterEncoding("UTF-8");

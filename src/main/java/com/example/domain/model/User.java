@@ -12,7 +12,6 @@ import java.util.*;
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY, generator = "uuid2"
@@ -24,10 +23,8 @@ public class User {
             type = "uuid-char"
     )
     public UUID userId;
-
     @NotBlank
     private String email;
-
     @NotBlank
     private String password;
 
@@ -88,12 +85,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return userId.equals(user.userId);
+        return email.equals(user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId);
+        return Objects.hash(email);
     }
 
     @Override

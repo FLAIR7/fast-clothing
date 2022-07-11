@@ -47,6 +47,7 @@ class OrdersServiceTest {
 
     @BeforeEach
     void setUp(){
+        Mockito.when(service.findById(ArgumentMatchers.any(UUID.class))).thenReturn(Optional.of(CreateOrders.createOrderWithId()));
         Mockito.when(userService.findById(ArgumentMatchers.any(UUID.class))).thenReturn(Optional.of(CreateUser.createUserWithId()));
         Mockito.when(userRepository.findById(ArgumentMatchers.any(UUID.class))).thenReturn(Optional.of(CreateUser.createUserWithId()));
         Mockito.when(repository.save(ArgumentMatchers.any(Orders.class))).thenReturn(CreateOrders.createOrderWithId());
@@ -57,6 +58,21 @@ class OrdersServiceTest {
         Orders orders = service.saveOrder(CreateOrders.createOrderWithId());
         Assertions.assertThat(orders).isNotNull();
         Assertions.assertThat(orders.getOrdersId()).isNotNull();
+    }
+
+    @Test
+    void findById_ReturnsOrder_WhenSuccessful(){
+        Orders ordersExpected = service.saveOrder(CreateOrders.createOrderWithId());
+        Orders orders = service.findById(ordersExpected.getOrdersId()).orElse(null);
+        Assertions.assertThat(orders).isNotNull();
+        Assertions.assertThat(orders).isEqualTo(ordersExpected);
+        Mockito.verify(repository).findById(ordersExpected.getOrdersId());
+    }
+
+    @Test
+    void deleteById_DeleteOrder_WhenSuccessful(){
+        Assertions.assertThatCode(() -> service.deleteById(UUID.fromString("d22f10ff-f7b2-4188-b652-946d7ba4361c")));
+        Mockito.verify(repository).findById(UUID.fromString("d22f10ff-f7b2-4188-b652-946d7ba4361c"));
     }
 
 }

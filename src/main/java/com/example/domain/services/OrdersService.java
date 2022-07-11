@@ -42,4 +42,14 @@ public class OrdersService {
         return orderRepository.save(orders);
     }
 
+    public void deleteById(UUID orderId){
+        Optional<Orders> optOrders = orderRepository.findById(orderId);
+
+        if(optOrders.isEmpty()){
+            throw new NotFoundException("Order not found");
+        }
+
+        orderRepository.deleteById(orderId);
+    }
+
 }

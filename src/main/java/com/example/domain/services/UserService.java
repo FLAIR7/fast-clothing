@@ -1,21 +1,18 @@
 package com.example.domain.services;
 
 import com.example.domain.dto.user.UserPasswordRequest;
+import com.example.domain.dto.user.UserPutRequest;
 import com.example.domain.exceptions.NotFoundException;
 import com.example.domain.mapper.UserMapper;
 import com.example.domain.model.Role;
 import com.example.domain.model.User;
 import com.example.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.function.Supplier;
 
 @Service
 @Transactional
@@ -66,6 +63,22 @@ public class UserService {
         }
 
         repository.deleteById(id);
+    }
+
+    @Transactional
+    public void update(UserPutRequest user){
+        User userSaved = this.findById(user.getUserId()).orElse(null);
+        boolean notSameEmail = !user.getEmail().equals(userSaved.getEmail());
+        if(notSameEmail){
+            if(user.getEmail() != null && !user.getEmail().isEmpty() && !user.getEmail().trim().isEmpty()){
+                boolean emailExists = repository.existsByEmail(user.getEmail());
+                if(emailExists){
+                    throw new IllegalArgumentException("Email already in use, try another");
+                }
+                userSaved.setEmail(user.getEmail());
+                UserMapper.toUserResponse(this.repository.save(userSaved));
+            }
+        }
     }
 
     @Transactional

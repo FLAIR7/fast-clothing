@@ -1,6 +1,8 @@
 package com.example.controller;
 
+import com.example.domain.dto.user.UserPasswordRequest;
 import com.example.domain.dto.user.UserPostRequest;
+import com.example.domain.dto.user.UserPutRequest;
 import com.example.domain.dto.user.UserResponse;
 import com.example.domain.mapper.UserMapper;
 import com.example.domain.model.User;
@@ -9,6 +11,7 @@ import com.example.domain.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,14 +28,18 @@ public class UserController {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserController(UserService service, UserRepository userRepository) {
+    public UserController(UserService service,
+                          UserRepository userRepository) {
         this.service = service;
         this.userRepository = userRepository;
     }
 
     @GetMapping
     public ResponseEntity<List<UserResponse>> findAll(){
-        List<UserResponse> users = userRepository.findAll().stream().map(UserMapper::toUserResponse)
+        List<UserResponse> users = userRepository
+                .findAll()
+                .stream()
+                .map(UserMapper::toUserResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(users);
     }
@@ -60,6 +67,14 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id){
         service.deleteById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Void> updateEmail(@RequestBody @Valid UserPutRequest user,
+                                                      @AuthenticationPrincipal User userPrincipal) {
+        user.setUserId(userPrincipal.getUserId());
+        service.update(user);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

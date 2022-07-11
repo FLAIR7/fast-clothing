@@ -17,7 +17,9 @@ public class UserPrincipal implements UserDetails {
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(String email,
+                         String password,
+                         Collection<? extends GrantedAuthority> authorities) {
         this.email = email;
         this.password = password;
         this.authorities = authorities;

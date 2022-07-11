@@ -62,12 +62,12 @@ public class ProductResponse {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductResponse that = (ProductResponse) o;
-        return productId.equals(that.productId) && name.equals(that.name) && price.equals(that.price) && quantity.equals(that.quantity);
+        return productId.equals(that.productId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productId, name, price, quantity);
+        return Objects.hash(productId);
     }
 
     @Override

@@ -49,7 +49,7 @@ class ProductServiceTest {
         Product product = service.findById(productExpected.getProductId()).orElse(null);
         Assertions.assertThat(product).isNotNull();
         Assertions.assertThat(product).isEqualTo(productExpected);
-        Mockito.verify(repository).findById(product.getProductId());
+        Mockito.verify(repository).findById(productExpected.getProductId());
     }
 
     @Test
