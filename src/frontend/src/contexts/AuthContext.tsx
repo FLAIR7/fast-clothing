@@ -22,8 +22,8 @@ export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 export function AuthProvider({children}: AuthProviderProps) {
     const [data, setData] = useState<AuthState>(() => {
-        const token = localStorage.getItem("auth_token");
-        const user = localStorage.getItem("user");
+        const token = localStorage.getItem('@FastCloth:auth_token');
+        const user = localStorage.getItem('@FastCloth:user');
         if(token && user && user != 'undefined') {
             return {token, user: JSON.parse(user)};
         }
@@ -31,13 +31,15 @@ export function AuthProvider({children}: AuthProviderProps) {
     });
 
     const signIn = useCallback(async ({email, password}: UserPostRequest) => {
-        const response = await api.post('login', {
-            email, password
-        });
-        const {token, email2} = response.data;
+        const params = new URLSearchParams();
+        params.append('username', email);
+        params.append('password', password);
+        const response = await api.post('login', params);
+        const {email2} = response.data;
+        const token = JSON.stringify(response.data);
         const user = {email, email2};
-        localStorage.setItem('auth_token', token);
-        localStorage.setItem('user', JSON.stringify(user));
+        window.localStorage.setItem('@FastCloth:auth_token', token);
+        window.localStorage.setItem('@FastCloth:user', JSON.stringify(user));
         setData({token, user});
     }, [])
 

@@ -3,11 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartButton, Items, Logo, StyledAppBar, StyledToolbar } from "./Navbar.styles";
 
-const Container = styled.div`
-    height: 60px;
-    background-color: black;
-`;
-
 const Navbar = () => {
 
     const history = useNavigate();
@@ -20,18 +15,17 @@ const Navbar = () => {
                     <Button color="inherit" onClick={() => history('/shop')}>
                         Shop
                     </Button>
-                    <>
-                        <Button color="inherit">
+
+                        <Button color="inherit" onClick={() => history('/login')}>
                             Login
                         </Button>
-                        <Button color="inherit">
+                        <Button color="inherit" onClick={() => history('/register')}>
                             Register
                         </Button>
-                    </>
+                    
                     <CartButton>
                     </CartButton>
                 </Items>
-
             </StyledToolbar>
         </StyledAppBar>
     );

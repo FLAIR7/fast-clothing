@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		"& .MuiTextField-root": {
 			margin: theme.spacing(1),
-			width: "100%",
+            width: '100%'
 		},
 		"& .MuiButton-root": {
 			margin: theme.spacing(1),
@@ -60,31 +60,3 @@ export function Register() {
         </Container> 
     );
 }
-
-// const user = {
-//     email: "diego@gmail.com",
-//     password: "diego123"
-// }
-
-// function saveUser(){
-//     api.post('/login', user)
-//     .then(res => {
-//         console.log(res.data)
-//     })
-//     .catch(error => {
-//         console.log(error);
-//     })
-// }
-
-// function pegaTokenJWTePrintaNoConsoleDaPagina(){
-//     const params = new URLSearchParams();
-//     params.append('username', 'milgrau@gmail.com');
-//     params.append('password', 'milgrau123');
-//     api.post('/login', params)
-//     .then(res => {
-//         console.log(res);
-//     })
-//     .catch(error => {
-//         console.log(error);
-//     });
-// }

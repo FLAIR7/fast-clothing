@@ -7,6 +7,8 @@ import com.example.domain.model.Product;
 import com.example.domain.repository.ProductRepository;
 import com.example.domain.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,12 +35,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductResponse>> findAll(){
-        List<ProductResponse> response = repository
-                .findAll()
-                .stream()
-                .map(ProductMapper::toProductResponse)
-                .collect(Collectors.toList());
+    public ResponseEntity<Page<Product>> findAll(Pageable page){
+        Page<Product> response = service.findAll(page);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -51,8 +49,8 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID productId){
-        service.deleteById(productId);
+    public ResponseEntity<Void> delete(@PathVariable UUID id){
+        service.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

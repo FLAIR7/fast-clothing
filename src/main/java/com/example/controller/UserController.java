@@ -8,13 +8,16 @@ import com.example.domain.mapper.UserMapper;
 import com.example.domain.model.User;
 import com.example.domain.repository.UserRepository;
 import com.example.domain.services.UserService;
+import com.example.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -56,6 +59,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/info")
+    public ResponseEntity<UserResponse> info(@AuthenticationPrincipal UserDetails user){
+        User userSaved = service.findByEmail(user.getUsername()).orElse(null);
+        UserResponse response = UserMapper.toUserResponse(userSaved);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+
     @PostMapping
     public ResponseEntity<UserResponse> save(@Valid @RequestBody UserPostRequest request){
         User user = UserMapper.toUser(request);
@@ -71,10 +82,9 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Void> updateEmail(@RequestBody @Valid UserPutRequest user,
-                                                      @AuthenticationPrincipal User userPrincipal) {
-        user.setUserId(userPrincipal.getUserId());
-        service.update(user);
+    public ResponseEntity<Void> updateEmail(@AuthenticationPrincipal UserPrincipal user,
+                                                      @Valid @RequestBody UserPutRequest request) {
+        service.update(request);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

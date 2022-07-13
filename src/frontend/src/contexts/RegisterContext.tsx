@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import { UserPostRequest } from "../types/types";
 import { AuthContext } from "./AuthContext";
 import {validateRegister} from "../validations/userValidation";
+import {ToastContext} from "./ToastContext";
 
 interface RegisterContextProviderProps {
     children: ReactNode,
@@ -23,6 +24,7 @@ export function RegisterProvider({children}: RegisterContextProviderProps) {
     const [password, setPassword] = useState<string>('');
 
     const {signUp} = useContext(AuthContext);
+    const {addToast} = useContext(ToastContext);
 
     const history = useNavigate();
 
@@ -34,12 +36,24 @@ export function RegisterProvider({children}: RegisterContextProviderProps) {
         await validateRegister(user).then(async () => {
             await signUp({email, password}).then(() => {
                 history('/');
-                alert('success inside signUp');
+                addToast({
+                    type: 'success',
+                    title: 'sing up success!',
+                    description: "You can now, sign in!"
+                });
             }).catch(err => {
-                alert('error inside signUp function');
+                addToast({
+                    type: 'error',
+                    title: 'error!',
+                    description: "Something went wrong!"
+                });
             }); 
         }).catch(err => {
-            alert('error inside validateRegister');
+            addToast({
+                type: 'error',
+                title: 'error!',
+                description: "Something went wrong!"
+            });
         });
     }, [email, password, signUp, history]);
 

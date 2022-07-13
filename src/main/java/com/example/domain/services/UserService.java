@@ -55,6 +55,10 @@ public class UserService {
         return repository.findById(id);
     }
 
+    public Optional<User> findByEmail(String email){
+        return repository.findByEmail(email);
+    }
+
     public void deleteById(UUID id) {
         Optional<User> optUser = repository.findById(id);
 
@@ -67,7 +71,7 @@ public class UserService {
 
     @Transactional
     public void update(UserPutRequest user){
-        User userSaved = this.findById(user.getUserId()).orElse(null);
+        User userSaved = repository.findByEmail(user.getEmail()).orElse(null);
         boolean notSameEmail = !user.getEmail().equals(userSaved.getEmail());
         if(notSameEmail){
             if(user.getEmail() != null && !user.getEmail().isEmpty() && !user.getEmail().trim().isEmpty()){

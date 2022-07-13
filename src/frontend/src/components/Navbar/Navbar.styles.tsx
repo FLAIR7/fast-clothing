@@ -6,8 +6,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 export const StyledAppBar = styled(AppBar)`
     position: sticky !important;
     top: 0;
-    width: 100vw;
     display: flex;
+    width: 100%
     align-items: center;
     flex-direction: row;
 `;
@@ -18,8 +18,8 @@ export const StyledToolbar = styled(Toolbar)`
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    width: 100%;
-    background-color: black;
+    background-color: white;
+    color: black;
 
 
     @media (max-width: 1024px){
