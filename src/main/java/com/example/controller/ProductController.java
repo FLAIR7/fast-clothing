@@ -6,19 +6,16 @@ import com.example.domain.mapper.ProductMapper;
 import com.example.domain.model.Product;
 import com.example.domain.repository.ProductRepository;
 import com.example.domain.services.ProductService;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -35,7 +32,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Product>> findAll(Pageable page){
+    public ResponseEntity<Page<Product>> findAll(@ParameterObject Pageable page){
         Page<Product> response = service.findAll(page);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

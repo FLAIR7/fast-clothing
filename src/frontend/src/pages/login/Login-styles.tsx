@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Constainer = styled.div`
     display: flex;
     width: 100vw;
-    height: calc(100vh - 64px);
+    height: 100%;
 `;
 
 export const FormContainer = styled.div`
