@@ -8,7 +8,7 @@ export function Navbar(){
   return (
     <NavbarBs sticky="top" className="bg-white shadow-sm mb-3">
       <Container>
-        <h1 className="logo">Fast Clothing</h1>
+        <NavbarBs.Brand>Fast Clothing</NavbarBs.Brand>
         <Nav>
           <Nav.Link to="/" as={NavLink}>
             Home

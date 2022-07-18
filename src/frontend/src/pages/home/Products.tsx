@@ -10,6 +10,11 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
+/*
+  TEST PAGE USING LIST OF PRODUCTS
+  NOT THE REAL ONE
+*/ 
+
 export function Products() {
 
   return (

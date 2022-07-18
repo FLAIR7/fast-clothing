@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useCallback, useContext, useState } from "react";
 import { Page, Pageable} from "../types/pageTypes"
+import { ProductResponseBody } from "../types/productTypes";
 import { createAnEmptyPagination } from "../utils/createAnEmptyPaginatio";
 import { ToastContext } from "./ToastContext";
 
@@ -27,7 +28,7 @@ export const PaginationContext = createContext<PaginationContextData>({} as Pagi
 export function PaginationProvider({children}: PaginationProviderProps) {
 
     const [pagination, setPagination] = useState<Page>(createAnEmptyPagination());
-    const [size, setSize] = useState<number>(6);
+    const [size, setSize] = useState<number>(10);
     const [sort, setSort] = useState<string>('');
     const [order, setOrder] = useState<'asc' | 'desc'>('asc');
     

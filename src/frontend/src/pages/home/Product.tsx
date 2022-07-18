@@ -4,11 +4,16 @@ import { useShoppingCart } from '../../contexts/ShoppingCartContext';
 import { formatCurrency} from "../../utils/formatCurrency";
 
 type StoreItemProps = {
-  id: number
+  id: string
   name: string
   price: number
   img: string
 }
+
+/*
+  TEST PAGE USING LIST OF PRODUCTS
+  NOT THE REAL ONE
+*/ 
 
 const Info = styled.div`
   opacity: 0;

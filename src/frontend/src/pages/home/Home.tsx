@@ -5,15 +5,15 @@ import { ProductResponseBody } from '../../types/productTypes'
 import api from '../../services/api'
 import axios, { AxiosPromise, AxiosResponse } from 'axios'
 import ProductList from '../../components/product/ProductList'
-import {Products} from "./Products";
 import { Footer } from '../../components/footer/Footer'
+import data from "../../item.json";
 
 export function Home() {
 
   const controller = new ProductController();
   return (
       <div>
-        <Products/>
+        <ProductList controller={controller}/>
         <Footer/>
       </div>
   )

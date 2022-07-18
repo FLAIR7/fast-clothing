@@ -1,5 +1,5 @@
 
-import { Facebook, Instagram, LinkedIn } from "@material-ui/icons";
+import { Facebook, Instagram, LinkedIn, MailOutline, Phone, Room } from "@material-ui/icons";
 import {
     Container,
     Left,
@@ -11,7 +11,8 @@ import {
     Logo,
     Desc,
     SocialContainer,
-    SocialIcon
+    SocialIcon,
+    ContactItem
 } from "./Footer-styles";
 
 export const Footer = () => {
@@ -36,8 +37,20 @@ export const Footer = () => {
             </Left>
             <Center>
                 <Title>About us</Title>
+                <p>We are the best ecommerce in the world</p>
             </Center>
-            <Right></Right>
+            <Right>
+                <Title>Contact</Title>
+                <ContactItem>
+                    <Room style={{marginRight:"10px"}}/> Street Nowhere
+                </ContactItem>
+                <ContactItem>
+                    <Phone style={{marginRight:"10px"}}/> +1 111 111
+                </ContactItem>
+                <ContactItem>
+                    <MailOutline style={{marginRight:"10px"}}/> contact@fastclothing.com
+                </ContactItem>
+            </Right>
         </Container>
     );
 }

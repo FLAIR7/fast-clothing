@@ -1,6 +1,7 @@
 export interface ProductResponseBody {
     productId: string;
     name: string;
-    price: string;
-    quantity: string;
+    price: number;
+    quantity: number;
+    img: string;
 }
