@@ -33,7 +33,7 @@ export function Register() {
     
     return (
         <Container>
-            {isMobile ? "" : <Image/>}
+            {/* {isMobile ? "" : <Image/>} */}
             <FormContainer className={classes.root}>
                 <Headline>Do not have an account?</Headline>
                 <Text>Register with your e-mail and password</Text>

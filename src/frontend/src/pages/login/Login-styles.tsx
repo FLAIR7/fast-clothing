@@ -3,7 +3,15 @@ import styled from "styled-components";
 export const Constainer = styled.div`
     display: flex;
     width: 100vw;
-    height: 100%;
+    align-items: center;
+    min-height: 70vh;
+    justify-content: center;
+
+    @media (max-width: 1024px){
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
 `;
 
 export const FormContainer = styled.div`

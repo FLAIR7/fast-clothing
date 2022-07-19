@@ -41,7 +41,7 @@ public class UserService {
             throw new RuntimeException("Email already in use");
         }
         
-        user.setRoles(Collections.singleton(Role.ADMIN));
+        user.setRoles(Collections.singleton(Role.USER));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return repository.save(user);
@@ -71,7 +71,7 @@ public class UserService {
 
     @Transactional
     public void update(UserPutRequest user){
-        User userSaved = repository.findByEmail(user.getEmail()).orElse(null);
+        User userSaved = repository.findById(user.getUserId()).orElse(null);
         boolean notSameEmail = !user.getEmail().equals(userSaved.getEmail());
         if(notSameEmail){
             if(user.getEmail() != null && !user.getEmail().isEmpty() && !user.getEmail().trim().isEmpty()){

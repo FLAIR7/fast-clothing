@@ -72,8 +72,9 @@ public class JwtAuthenticationFilterConfig extends UsernamePasswordAuthenticatio
                 .withIssuer(request.getRequestURI().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
-        Map<String, String> tokens = new HashMap<>();
-        tokens.put("acess_token", acess_token);
+//        Map<String, String> tokens = new HashMap<>();
+//        tokens.put("acess_token", acess_token);
+        String tokens = acess_token;
         response.setContentType(APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
     }

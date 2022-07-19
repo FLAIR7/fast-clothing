@@ -2,6 +2,7 @@ package com.example.util;
 
 import com.example.domain.dto.user.UserPasswordRequest;
 import com.example.domain.dto.user.UserPostRequest;
+import com.example.domain.dto.user.UserPutRequest;
 import com.example.domain.dto.user.UserResponse;
 import com.example.domain.model.User;
 
@@ -42,7 +43,17 @@ public class CreateUser {
     }
 
     public static UserPostRequest createUserPostRequest(){
-        return new UserPostRequest("james@gmail.com", "james123");
+        return new UserPostRequest(
+                "james@gmail.com",
+                "james123"
+        );
+    }
+
+    public static UserPutRequest createUserPutRequest(){
+        return new UserPutRequest(
+                UUID.fromString("c3e4a88f-c2b2-4822-87f0-06fd7cefb0cb"),
+                "james@gmail.com"
+        );
     }
 
     public static UserResponse createUserResponse(){

@@ -12,32 +12,31 @@ public class OrdersRequest {
     @NotNull
     private List<UUID> productsId;
 
-    @NotNull
-    private UUID userId;
+    private String email;
 
     @NotNull
     private Payment method;
 
-    public OrdersRequest(List<UUID> productsId, UUID userId, Payment method) {
+    public OrdersRequest(List<UUID> productsId, String email, Payment method) {
         this.productsId = productsId;
-        this.userId = userId;
+        this.email = email;
         this.method = method;
     }
 
-    public List<UUID> getProducts() {
+    public List<UUID> getProductsId() {
         return productsId;
     }
 
-    public void setProducts(List<UUID> products) {
-        this.productsId = products;
+    public void setProductsId(List<UUID> productsId) {
+        this.productsId = productsId;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Payment getMethod() {
@@ -49,23 +48,10 @@ public class OrdersRequest {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrdersRequest that = (OrdersRequest) o;
-        return productsId.equals(that.productsId) && userId.equals(that.userId) && method == that.method;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(productsId, userId, method);
-    }
-
-    @Override
     public String toString() {
         return "OrderRequest{" +
                 "productsId=" + productsId +
-                ", userId=" + userId +
+                ", email=" + email +
                 ", method=" + method +
                 '}';
     }

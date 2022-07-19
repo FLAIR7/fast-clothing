@@ -44,7 +44,7 @@ export function CartItem({id, quantity}: CartItemProps){
                 </div>
                 <Button size="sm" onClick={() => increaseCartQuantity(item.productId)}>+</Button>
                 {quantity !== 1 ? (
-                <Button size="sm" variant="outline-danger" className="btn btn-danger" onClick={() => decreaseCartQuantity(item.productId)}>-</Button>
+                <Button size="sm" className="btn btn-danger" onClick={() => decreaseCartQuantity(item.productId)}>-</Button>
                 ) : (
                 <Button size="sm" className="btn btn-danger" onClick={() => removeFromCart(item.productId)}>Remove</Button>)}
             </div>

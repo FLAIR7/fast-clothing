@@ -50,8 +50,8 @@ public class OrdersController {
 
     @PostMapping
     public ResponseEntity<OrdersResponse> save(@Valid @RequestBody OrdersRequest request){
-        List<Product> products = (List<Product>) productRepository.findAllById(request.getProducts());
-        User user = userRepository.findById(request.getUserId()).orElse(null);
+        List<Product> products = (List<Product>) productRepository.findAllById(request.getProductsId());
+        User user = userRepository.findByEmailFetchRoles(request.getEmail()).orElse(null);
         Orders order = OrdersMapper.toOrder(request);
         order.setProductList(products);
         order.setUser(user);

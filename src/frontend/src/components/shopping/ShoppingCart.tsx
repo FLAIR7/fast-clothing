@@ -6,6 +6,7 @@ import ProductController from "../../controllers/productController";
 import { CartItem } from "../cart-item/CartItem";
 import { formatCurrency } from "../../utils/formatCurrency";
 import api from "../../services/api";
+import { getAuthHeader } from "../../services/auth";
 
 type ShoppingCartProps = {
     isOpen: boolean
@@ -40,25 +41,25 @@ export function ShoppingCart({isOpen}: ShoppingCartProps){
                         )}
                     </div>
                 </Stack>
-                <Button>SHOP NOW!</Button>
+                <Button onClick={() => order()}>SHOP NOW!</Button>
             </Offcanvas.Body>
         </Offcanvas>
     )
 }
-
-/* Authorization jwt to make
 const ordem = {
     "productsId": [
-        "c2c9287f-e237-41f1-b339-7128788586f0"
+        "4d955512-5277-472c-84b3-f40fc420f371"
     ],
-    "userId": "e2b68022-ac7a-4888-98ff-2f80964e9d3c",
+    "email": "diego@gmail.com",
     "method": 1
 }
 
 function order(){
-    api.post("/orders", ordem, {headers: {Authorization: 'Bearer' + localStorage.getItem("@Fast_Cloth:auth_token")}}).then(res => {
+    const token = JSON.parse(localStorage.getItem("@FastCloth:auth_token") || "");
+    console.log(token);
+    api.post("/orders", ordem, {headers: {"Authorization": `Bearer ${token}`}}).then(res => {
         console.log(res.data)
     }).catch(err => {
         console.log(err);
     })
-}*/
+}
