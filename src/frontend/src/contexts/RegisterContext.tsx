@@ -35,7 +35,7 @@ export function RegisterProvider({children}: RegisterContextProviderProps) {
         }
         await validateRegister(user).then(async () => {
             await signUp({email, password}).then(() => {
-                history('/');
+                history('/login');
                 addToast({
                     type: 'success',
                     title: 'sing up success!',

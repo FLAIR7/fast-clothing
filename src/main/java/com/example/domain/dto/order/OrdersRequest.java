@@ -17,6 +17,10 @@ public class OrdersRequest {
     @NotNull
     private Payment method;
 
+    public OrdersRequest(){
+
+    }
+
     public OrdersRequest(List<UUID> productsId, String email, Payment method) {
         this.productsId = productsId;
         this.email = email;

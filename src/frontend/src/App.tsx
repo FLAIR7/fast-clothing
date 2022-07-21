@@ -11,6 +11,7 @@ import { ToastProvider } from './contexts/ToastContext';
 import { LoginProvider } from './contexts/LoginContext';
 import { PaginationProvider } from './contexts/PaginationContext';
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
+import { OrderProvider } from './contexts/OrderContext';
 
 function App() {
 
@@ -21,14 +22,16 @@ function App() {
             <LoginProvider>
               <RegisterProvider>
                 <PaginationProvider>
+                <OrderProvider>
                 <ShoppingCartProvider>
-                  <Navbar/>
-                  <Routes>
-                    <Route path='/' element={<Home/>}></Route>
-                    <Route path='/login' element={<Login/>}></Route>
-                    <Route path='/register' element={<Register/>}></Route>
-                  </Routes>
+                    <Navbar/>
+                    <Routes>
+                      <Route path='/' element={<Home/>}></Route>
+                      <Route path='/login' element={<Login/>}></Route>
+                      <Route path='/register' element={<Register/>}></Route>
+                    </Routes>
                   </ShoppingCartProvider>
+                  </OrderProvider>
                 </PaginationProvider>
               </RegisterProvider>
             </LoginProvider>

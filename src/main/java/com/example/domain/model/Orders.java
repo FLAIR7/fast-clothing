@@ -27,7 +27,7 @@ public class Orders {
 //    @ColumnDefault("random_uuid()")
     public UUID ordersId;
 
-    @OneToMany(
+    @ManyToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
     )

@@ -1,22 +1,27 @@
 import React, { createContext, ReactNode, useCallback, useContext, useState } from 'react'
+import api from '../services/api';
 import { OrderRequestBody } from '../types/productTypes';
 import { ToastContext } from './ToastContext';
+import {useNavigate} from "react-router-dom";
+import { AuthContext } from './AuthContext';
 
 type OrderProviderProps = {
     children: ReactNode;
 }
 
-interface OrderContextData{
+type OrderContextData = {
     productsId: string[],
     email: string,
-    method: number
+    method: number,
+    save: (body: OrderRequestBody) => Promise<void>,
+    setThings: () => void,
 }
 
 export function useOrder(){
     return useContext(OrderContext);
 }
 
-const OrderContext = createContext<OrderContextData>({} as OrderContextData)
+export const OrderContext = createContext({} as OrderContextData)
 
 export function OrderProvider({children}: OrderProviderProps){
 
@@ -24,7 +29,10 @@ export function OrderProvider({children}: OrderProviderProps){
     const [email, setEmail] = useState<string>('');
     const [method, setMethod] = useState<number>(1);
 
+
+    const {user} = useContext(AuthContext);
     const {addToast} = useContext(ToastContext);
+    const history = useNavigate();
 
     const save = useCallback(async () => {
         const orderToBeSaved: OrderRequestBody = {
@@ -32,10 +40,22 @@ export function OrderProvider({children}: OrderProviderProps){
             email: email,
             method: method
         }
+        const token = JSON.parse(localStorage.getItem("@FastCloth:auth_token") || "");
+        api.post('/orders', orderToBeSaved, {headers: {"Authorization": `Bearer ${token}`}})
     }, [])
 
+    function setThings() {
+        
+        
+    }
+
     return (
-        <OrderContext.Provider value={{productsId, email, method}}>
+        <OrderContext.Provider value={{
+            productsId, 
+            email, 
+            method, 
+            save, 
+            setThings}}>
             {children}
         </OrderContext.Provider>
     )

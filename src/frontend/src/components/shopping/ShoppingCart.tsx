@@ -6,7 +6,10 @@ import ProductController from "../../controllers/productController";
 import { CartItem } from "../cart-item/CartItem";
 import { formatCurrency } from "../../utils/formatCurrency";
 import api from "../../services/api";
-import { getAuthHeader } from "../../services/auth";
+import {OrderContext} from "../../contexts/OrderContext";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { ToastContext} from "../../contexts/ToastContext";
 
 type ShoppingCartProps = {
     isOpen: boolean
@@ -15,7 +18,38 @@ type ShoppingCartProps = {
 export function ShoppingCart({isOpen}: ShoppingCartProps){
     const {closeCart, cartItems} = useShoppingCart();
     const {pagination, loadPage} = useContext(PaginationContext);
+    const {save, setThings} = useContext(OrderContext);
+    const {user} = useContext(AuthContext);
     const controller = new ProductController();
+
+    const history = useNavigate();
+    const {addToast} = useContext(ToastContext);
+
+    function orders(){
+
+        if(user === null || user === undefined) {
+            history('/login');
+            closeCart();
+        } else {
+            const token = JSON.parse(localStorage.getItem("@FastCloth:auth_token") || "");
+            const order = {
+                "productsId":
+                    cartItems.map(item => item.id),
+                "email": Object.values(user)[0],
+                "method": 1
+            }
+            api.post("/orders", order, {headers: {"Authorization": `Bearer ${token}`}})
+                .then(res => {
+                    addToast({
+                        type: 'success',
+                        title: 'Order successful',
+                        description: 'Your products will arrive in 1 minute'
+                    });                
+                }).catch(err => {
+                    console.log(err);
+                })
+        }
+    }
 
     useEffect(() => {
         loadPage(controller);
@@ -41,25 +75,8 @@ export function ShoppingCart({isOpen}: ShoppingCartProps){
                         )}
                     </div>
                 </Stack>
-                <Button onClick={() => order()}>SHOP NOW!</Button>
+                <Button onClick={() => orders()}>SHOP NOW!</Button>
             </Offcanvas.Body>
         </Offcanvas>
     )
-}
-const ordem = {
-    "productsId": [
-        "4d955512-5277-472c-84b3-f40fc420f371"
-    ],
-    "email": "diego@gmail.com",
-    "method": 1
-}
-
-function order(){
-    const token = JSON.parse(localStorage.getItem("@FastCloth:auth_token") || "");
-    console.log(token);
-    api.post("/orders", ordem, {headers: {"Authorization": `Bearer ${token}`}}).then(res => {
-        console.log(res.data)
-    }).catch(err => {
-        console.log(err);
-    })
 }
