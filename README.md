@@ -33,7 +33,7 @@ I built this application to practice my React and Spring skills.
 - [Bootstrap](https://getbootstrap.com/)
 
 ## 👓 Attention
-The project isn't conclude yet, but is 80% complete.
+If you find out some bug, make feel free to make a pull request or to say more about it on the github issues
 
 ## Quick Start 🚀
 
