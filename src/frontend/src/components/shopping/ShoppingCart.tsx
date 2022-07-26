@@ -39,12 +39,13 @@ export function ShoppingCart({isOpen}: ShoppingCartProps){
                 "method": 1
             }
             api.post("/orders", order, {headers: {"Authorization": `Bearer ${token}`}})
-                .then(res => {
+                .then(() => {
                     addToast({
                         type: 'success',
                         title: 'Order successful',
                         description: 'Your products will arrive in 1 minute'
-                    });                
+                    }); 
+                    alert('Your products will arrive in 1 minute');                
                 }).catch(err => {
                     console.log(err);
                 })

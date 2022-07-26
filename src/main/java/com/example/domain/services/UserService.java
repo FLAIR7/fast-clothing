@@ -22,7 +22,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository repository, PasswordEncoder passwordEncoder){
+    public UserService(UserRepository repository,
+                       PasswordEncoder passwordEncoder){
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -90,8 +91,9 @@ public class UserService {
         if(user.getPassword() == null || (user.getPassword().isEmpty() || user.getPassword().trim().isEmpty())) {
             throw new IllegalArgumentException("Your password is null");
         }
-        User userExpected = this.findById(user.getUserId()).orElse(null);
+        User userExpected = repository.findById(user.getUserId()).orElse(null);
+        System.out.println(userExpected.getPassword());
         userExpected.setPassword(passwordEncoder.encode(userExpected.getPassword()));
-        repository.save(userExpected);
+        UserMapper.toUserResponse(this.repository.save(userExpected));
     }
 }

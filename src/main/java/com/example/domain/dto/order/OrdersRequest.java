@@ -2,6 +2,7 @@ package com.example.domain.dto.order;
 
 import com.example.domain.model.Payment;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
@@ -12,6 +13,7 @@ public class OrdersRequest {
     @NotNull
     private List<UUID> productsId;
 
+    @NotBlank
     private String email;
 
     @NotNull

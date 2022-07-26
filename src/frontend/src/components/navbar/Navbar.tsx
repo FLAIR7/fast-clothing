@@ -2,6 +2,8 @@ import React from 'react'
 import { Button, Container,Nav, Navbar as NavbarBs} from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
 import { useShoppingCart } from '../../contexts/ShoppingCartContext';
+import { HomeOutlined } from '@material-ui/icons';
+
 
 export function Navbar(){
   const {openCart, cartQuantity} = useShoppingCart();
@@ -11,7 +13,7 @@ export function Navbar(){
         <NavbarBs.Brand>Fast Clothing</NavbarBs.Brand>
         <Nav>
           <Nav.Link to="/" as={NavLink}>
-            Home
+            <HomeOutlined/>
           </Nav.Link>
           <Nav.Link to="/login" as={NavLink}>
             Login

@@ -1,12 +1,19 @@
 package com.example.domain.dto.user;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.UUID;
 
 public class UserPutRequest {
 
+    @NotNull
     private UUID userId;
 
+    @NotBlank(message = "Email is required")
+    @Email(message = "This doesnt look like an email")
+    @NotNull
     private String email;
 
     public UserPutRequest() {

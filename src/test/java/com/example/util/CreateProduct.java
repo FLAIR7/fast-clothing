@@ -9,6 +9,14 @@ import java.util.UUID;
 
 public class CreateProduct {
 
+    public static Product createProduct(){
+        return new Product(
+                "TV",
+                BigDecimal.valueOf(1500),
+                5
+        );
+    }
+
     public static Product createProductWithId(){
         return new Product(
                 UUID.fromString(

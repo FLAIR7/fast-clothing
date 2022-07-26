@@ -57,11 +57,11 @@ class UserRepositoryTest {
     }
 
     @Test
-    void delete_DeleteUser_WhenSuccessful(){
+    void deleteById_DeleteUser_WhenSuccessful(){
         User user = CreateUser.createUser();
         User userSaved = repository.save(user);
 
-        repository.delete(userSaved);
+        repository.deleteById(userSaved.getUserId());
 
         Optional<User> optUser = repository.findById(userSaved.getUserId());
         Assertions.assertThat(optUser).isNotPresent();

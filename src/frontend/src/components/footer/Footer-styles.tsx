@@ -5,6 +5,7 @@ export const Container = styled.div`
     background-color: black;
     color: white;
     overflow: hidden;
+    height: 100%;
     @media only screen and (max-width: 1024px) {
         flex-direction: column;
         text-align: justify;

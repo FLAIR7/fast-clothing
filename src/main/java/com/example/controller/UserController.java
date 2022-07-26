@@ -12,7 +12,9 @@ import com.example.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +30,7 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService service;
+
     private final UserRepository userRepository;
 
     @Autowired
@@ -60,12 +63,12 @@ public class UserController {
     }
 
     @GetMapping("/info")
-    public ResponseEntity<UserResponse> info(@AuthenticationPrincipal UserDetails user){
+    public ResponseEntity<UserResponse> info(@AuthenticationPrincipal UserPrincipal user){
+        System.out.println(user.getUsername());
         User userSaved = service.findByEmail(user.getUsername()).orElse(null);
         UserResponse response = UserMapper.toUserResponse(userSaved);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
 
     @PostMapping
     public ResponseEntity<UserResponse> save(@Valid @RequestBody UserPostRequest request){
@@ -85,7 +88,14 @@ public class UserController {
     public ResponseEntity<Void> updateEmail(@AuthenticationPrincipal UserPrincipal user,
                                                       @Valid @RequestBody UserPutRequest request) {
         service.update(request);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PutMapping("/update/password")
+     public ResponseEntity<Void> updatePassword (@AuthenticationPrincipal UserPrincipal user,
+                                                    @Valid @RequestBody UserPasswordRequest request) {
+        service.updatePassword(request);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }
