@@ -29,7 +29,7 @@ public class Product {
     @NotBlank
     private String name;
 
-    @DecimalMax("999999")
+    @DecimalMax("9999")
     private BigDecimal price;
 
     private Integer quantity;

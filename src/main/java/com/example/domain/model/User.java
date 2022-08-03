@@ -1,17 +1,16 @@
 package com.example.domain.model;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
 @Table(name = "users")
 public class User {
+    
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY, generator = "uuid2"
@@ -23,8 +22,10 @@ public class User {
             type = "uuid-char"
     )
     public UUID userId;
+
     @NotBlank
     private String email;
+
     @NotBlank
     private String password;
 

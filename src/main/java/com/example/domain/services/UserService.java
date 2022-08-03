@@ -28,6 +28,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Transactional
     public User saveUser(User user){
         Optional<User> optUser = repository.findByEmail(user.getEmail());
         boolean exists = false;
@@ -48,18 +49,22 @@ public class UserService {
         return repository.save(user);
     }
 
+    @Transactional(readOnly = true)
     public List<User> findAll(){
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Optional<User> findById(UUID id){
         return repository.findById(id);
     }
 
+    @Transactional(readOnly = true)
     public Optional<User> findByEmail(String email){
         return repository.findByEmail(email);
     }
 
+    @Transactional
     public void deleteById(UUID id) {
         Optional<User> optUser = repository.findById(id);
 

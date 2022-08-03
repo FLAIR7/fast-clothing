@@ -1,6 +1,5 @@
 package com.example.domain.model;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -24,7 +23,6 @@ public class Orders {
     @Type(
             type = "uuid-char"
     )
-//    @ColumnDefault("random_uuid()")
     public UUID ordersId;
 
     @ManyToMany(
@@ -34,7 +32,8 @@ public class Orders {
     private List<Product> products;
 
     @ManyToOne(
-            cascade = CascadeType.MERGE
+            cascade = CascadeType.MERGE,
+            optional = false
     )
     @JoinColumn(
             name = "userId"

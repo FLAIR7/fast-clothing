@@ -23,10 +23,12 @@ public class ProductService {
         this.repository = repository;
     }
 
+    @Transactional(readOnly = true)
     public Page<Product> findAll(Pageable page){
         return repository.findAll(page);
     }
 
+    @Transactional
     public Product saveProduct(Product product){
         if(null == product.getPrice()){
             product.setPrice(BigDecimal.ONE);
@@ -34,10 +36,12 @@ public class ProductService {
         return repository.save(product);
     }
 
+    @Transactional(readOnly = true)
     public Optional<Product> findById(UUID productId){
         return repository.findById(productId);
     }
 
+    @Transactional(readOnly = true)
     public Product increaseInventoryAmount(Product product, Integer inventoryAmount){
         if(0 >= inventoryAmount){
             throw new ArithmeticException("Cannot increase by negatives or zero");
