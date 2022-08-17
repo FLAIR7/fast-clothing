@@ -6,12 +6,11 @@ import ProductController from "../../controllers/productController";
 import { CartItem } from "../cart-item/CartItem";
 import { formatCurrency } from "../../utils/formatCurrency";
 import api from "../../services/api";
-import {OrderContext} from "../../contexts/OrderContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ToastContext} from "../../contexts/ToastContext";
 
-type ShoppingCartProps = {
+interface ShoppingCartProps {
     isOpen: boolean
 }
 
@@ -79,5 +78,5 @@ export function ShoppingCart({isOpen}: ShoppingCartProps){
                 <Button onClick={() => orders()}>SHOP NOW!</Button>
             </Offcanvas.Body>
         </Offcanvas>
-    )
+    );
 }

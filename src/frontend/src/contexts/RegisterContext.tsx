@@ -4,6 +4,7 @@ import { UserPostRequest } from "../types/types";
 import { AuthContext } from "./AuthContext";
 import {validateRegister} from "../validations/userValidation";
 import {ToastContext} from "./ToastContext";
+import { SingleBedOutlined } from "@material-ui/icons";
 
 interface RegisterContextProviderProps {
     children: ReactNode,

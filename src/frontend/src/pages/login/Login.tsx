@@ -17,11 +17,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-
 export default function LoginPage() {
     
-    const {login, handleEmailChange, handlePasswordChange,
-    email, password} = useContext(LoginContext);
+    const {
+        login, 
+        handleEmailChange, 
+        handlePasswordChange,
+        email, password
+    } = useContext(LoginContext);
 
     const classes = useStyles();
 

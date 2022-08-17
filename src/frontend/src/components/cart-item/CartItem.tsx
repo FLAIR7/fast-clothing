@@ -23,7 +23,6 @@ export function CartItem({id, quantity}: CartItemProps){
         loadPage(controller);
     }, [loadPage])
 
-
     const item = pagination.content.find(item => item.productId === id);
     if(item == null) return null
 

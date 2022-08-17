@@ -12,8 +12,7 @@ public class CreateProduct {
     public static Product createProduct(){
         return new Product(
                 "TV",
-                BigDecimal.valueOf(1500),
-                5
+                BigDecimal.valueOf(1500)
         );
     }
 
@@ -22,8 +21,7 @@ public class CreateProduct {
                 UUID.fromString(
                 "5987242e-2926-4ae2-a05a-ae294de4db8e"),
                 "TV",
-                BigDecimal.valueOf(1500),
-                5
+                BigDecimal.valueOf(1500)
         );
     }
 
@@ -33,8 +31,9 @@ public class CreateProduct {
         products.add(new Product(
                 UUID.fromString("4bf9a55a-d2a7-49a8-8d08-1b15fce7ca93"),
                 "IPHONE",
-                BigDecimal.valueOf(1000),
-                1));
+                BigDecimal.valueOf(1000)
+                )
+        );
         return products;
     }
 

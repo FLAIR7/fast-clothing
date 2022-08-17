@@ -14,16 +14,16 @@ function App() {
 
   return (
       <>
-      <ToastProvider>
-          <AuthProvider>
-            <LoginProvider>
-              <RegisterProvider>
+        <ToastProvider>
+           <AuthProvider>
+             <LoginProvider>
+               <RegisterProvider>
                 <PaginationProvider>
-                <OrderProvider>
-                <ShoppingCartProvider>
-                    <Navbar/>
-                    <Pages/>
-                  </ShoppingCartProvider>
+                  <OrderProvider>
+                    <ShoppingCartProvider>
+                      <Navbar/>
+                      <Pages/>
+                    </ShoppingCartProvider>
                   </OrderProvider>
                 </PaginationProvider>
               </RegisterProvider>

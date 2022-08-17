@@ -4,7 +4,6 @@ import { Button, TextField } from "@material-ui/core";
 import { RegisterContext } from "../../contexts/RegisterContext";
 import { makeStyles } from "@material-ui/core";
 
-
 const useStyles = makeStyles((theme) => ({
 	root: {
 		"& .MuiTextField-root": {

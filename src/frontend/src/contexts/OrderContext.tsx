@@ -5,11 +5,11 @@ import { ToastContext } from './ToastContext';
 import {useNavigate} from "react-router-dom";
 import { AuthContext } from './AuthContext';
 
-type OrderProviderProps = {
+interface OrderProviderProps {
     children: ReactNode;
 }
 
-type OrderContextData = {
+interface OrderContextData {
     productsId: string[],
     email: string,
     method: number,
@@ -41,8 +41,8 @@ export function OrderProvider({children}: OrderProviderProps){
             method: method
         }
         const token = JSON.parse(localStorage.getItem("@FastCloth:auth_token") || "");
-        api.post('/orders', orderToBeSaved, {headers: {"Authorization": `Bearer ${token}`}})
-    }, [])
+        await api.post('/orders', orderToBeSaved, {headers: {"Authorization": `Bearer ${token}`}})
+    }, [productsId, email, method, api])
 
     function setThings() {
         
@@ -58,5 +58,5 @@ export function OrderProvider({children}: OrderProviderProps){
             setThings}}>
             {children}
         </OrderContext.Provider>
-    )
+    );
 }
