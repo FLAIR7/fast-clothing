@@ -18,7 +18,7 @@ type ShoppingCartProps = {
 export function ShoppingCart({isOpen}: ShoppingCartProps){
     const {closeCart, cartItems} = useShoppingCart();
     const {pagination, loadPage} = useContext(PaginationContext);
-    const {save, setThings} = useContext(OrderContext);
+    // const {save, setThings} = useContext(OrderContext);
     const {user} = useContext(AuthContext);
     const controller = new ProductController();
 

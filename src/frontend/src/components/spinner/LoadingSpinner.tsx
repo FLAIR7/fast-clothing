@@ -1,4 +1,3 @@
-import { Center } from "../footer/Footer-styles";
 import "./spinner.css";
 
 export default function LoadingSpinner() {

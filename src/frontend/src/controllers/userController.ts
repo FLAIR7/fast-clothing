@@ -8,11 +8,9 @@ type order = {
     method: number
 }
 
-
 const create = (data: UserPostRequest) => {
     return api.post<UserPostRequest>('/users', data);
 }
-
 
 export const makeOrder = (data: order) => {
     return api.post<order>('/orders', data, {headers: {Authorization: 'Bearer ' + getAuthHeader()}});

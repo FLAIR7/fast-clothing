@@ -54,12 +54,12 @@ public class OrdersResponse {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrdersResponse that = (OrdersResponse) o;
-        return ordersId.equals(that.ordersId) && products.equals(that.products) && user.equals(that.user);
+        return ordersId.equals(that.ordersId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ordersId, products, user);
+        return Objects.hash(ordersId);
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.example.domain.mapper.UserMapper;
 import com.example.domain.model.User;
 import com.example.domain.repository.UserRepository;
 import com.example.domain.services.UserService;
+import com.example.exceptions.NotFoundException;
 import com.example.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,11 +52,11 @@ public class UserController {
         Optional<User> user = service.findById(id);
 
         if(user.isEmpty()){
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("User not found");
         }
         UserResponse response = UserMapper.toUserResponse(user.get());
 
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.status(HttpStatus.FOUND).body(response);
     }
 
     @GetMapping("/info")

@@ -1,10 +1,8 @@
 import TextField  from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import React, {FC, ReactElement, useContext, useEffect, useState} from "react";
+import React, {useContext} from "react";
 import { Constainer, FormContainer, Headline, Text } from "./Login-styles";
 import { makeStyles } from "@material-ui/core";
-import { useMediaQuery } from "react-responsive";
-import { classicNameResolver } from "typescript";
 import { LoginContext } from "../../contexts/LoginContext";
 
 const useStyles = makeStyles((theme) => ({

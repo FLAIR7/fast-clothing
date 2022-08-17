@@ -1,9 +1,7 @@
-import React, {useContext} from "react"; 
-import { Container, FormContainer, Headline, Image, Text } from "./Register-styles";
-import { useMediaQuery } from "react-responsive";
+import React from "react"; 
+import { Container, FormContainer, Headline, Text } from "./Register-styles";
 import { Button, TextField } from "@material-ui/core";
 import { RegisterContext } from "../../contexts/RegisterContext";
-import { LoadingContext } from "../../contexts/LoadingContext";
 import { makeStyles } from "@material-ui/core";
 
 
@@ -27,13 +25,8 @@ export function Register() {
 
     const classes = useStyles();
 
-    const {btnIsLoading} = useContext(LoadingContext);
-
-    const isMobile = useMediaQuery({ query: "(max-width: 1024px)"});
-    
     return (
         <Container>
-            {/* {isMobile ? "" : <Image/>} */}
             <FormContainer className={classes.root}>
                 <Headline>Do not have an account?</Headline>
                 <Text>Register with your e-mail and password</Text>

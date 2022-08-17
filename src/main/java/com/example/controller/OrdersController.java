@@ -8,6 +8,7 @@ import com.example.domain.repository.OrdersRepository;
 import com.example.domain.repository.ProductRepository;
 import com.example.domain.repository.UserRepository;
 import com.example.domain.services.OrdersService;
+import com.example.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -46,6 +48,16 @@ public class OrdersController {
                 .map(OrdersMapper::toOrderResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK).body(orders);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<OrdersResponse> findById(@PathVariable UUID id){
+        Optional<Orders> order = service.findById(id);
+        if(order.isEmpty()){
+            throw new NotFoundException("Order Not found");
+        }
+        OrdersResponse response = OrdersMapper.toOrderResponse(order.get());
+        return ResponseEntity.status(HttpStatus.FOUND).body(response);
     }
 
     @PostMapping

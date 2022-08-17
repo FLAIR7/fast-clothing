@@ -2,7 +2,7 @@ package com.example.domain.services;
 
 import com.example.domain.dto.user.UserPasswordRequest;
 import com.example.domain.dto.user.UserPutRequest;
-import com.example.domain.exceptions.NotFoundException;
+import com.example.exceptions.NotFoundException;
 import com.example.domain.mapper.UserMapper;
 import com.example.domain.model.Role;
 import com.example.domain.model.User;

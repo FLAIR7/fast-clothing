@@ -23,7 +23,7 @@ public class Orders {
     @Type(
             type = "uuid-char"
     )
-    public UUID ordersId;
+    private UUID ordersId;
 
     @ManyToMany(
             cascade = CascadeType.ALL,
@@ -70,6 +70,8 @@ public class Orders {
     public UUID getOrdersId() {
         return ordersId;
     }
+
+    public void setOrdersId(UUID orderId) { this.ordersId = orderId; }
 
     public List<Product> getProducts() {
         return products;

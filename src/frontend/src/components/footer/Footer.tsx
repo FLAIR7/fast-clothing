@@ -1,12 +1,9 @@
-
 import { Facebook, Instagram, LinkedIn, MailOutline, Phone, Room } from "@material-ui/icons";
 import {
     Container,
     Left,
     Center,
     Title,
-    List,
-    ListItem,
     Right,
     Logo,
     Desc,

@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useCallback, useContext, useState } from "react";
 import { Page, Pageable} from "../types/pageTypes"
-import { ProductResponseBody } from "../types/productTypes";
 import { createAnEmptyPagination } from "../utils/createAnEmptyPaginatio";
 import { ToastContext } from "./ToastContext";
 

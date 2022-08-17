@@ -1,6 +1,6 @@
 package com.example.domain.services;
 
-import com.example.domain.exceptions.NotFoundException;
+import com.example.exceptions.NotFoundException;
 import com.example.domain.model.Orders;
 import com.example.domain.model.User;
 import com.example.domain.repository.OrdersRepository;

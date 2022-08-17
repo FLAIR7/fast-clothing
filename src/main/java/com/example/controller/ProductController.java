@@ -6,6 +6,8 @@ import com.example.domain.mapper.ProductMapper;
 import com.example.domain.model.Product;
 import com.example.domain.repository.ProductRepository;
 import com.example.domain.services.ProductService;
+import com.example.exceptions.NotFoundException;
+import org.apache.coyote.Response;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -35,6 +38,17 @@ public class ProductController {
     public ResponseEntity<Page<Product>> findAll(@ParameterObject Pageable page){
         Page<Product> response = service.findAll(page);
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse> findById(@PathVariable UUID id){
+        Optional<Product> product = service.findById(id);
+
+        if(product.isEmpty()) {
+            throw new NotFoundException("Product Not found");
+        }
+        ProductResponse response = ProductMapper.toProductResponse(product.get());
+        return ResponseEntity.status(HttpStatus.FOUND).body(response);
     }
 
     @PostMapping

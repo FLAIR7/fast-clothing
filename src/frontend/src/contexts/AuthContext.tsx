@@ -24,7 +24,7 @@ export function AuthProvider({children}: AuthProviderProps) {
     const [data, setData] = useState<AuthState>(() => {
         const token = localStorage.getItem('@FastCloth:auth_token');
         const user = localStorage.getItem('@FastCloth:user');
-        if(token && user && user != 'undefined') {
+        if(token && user && user !== 'undefined') {
             return {token, user: JSON.parse(user)};
         }
         return {} as AuthState;

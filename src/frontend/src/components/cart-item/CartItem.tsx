@@ -14,8 +14,8 @@ export function CartItem({id, quantity}: CartItemProps){
     const { 
         removeFromCart,
         increaseCartQuantity, 
-        getItemQuantity,
-        decreaseCartQuantity} = useShoppingCart();
+        decreaseCartQuantity
+    } = useShoppingCart();
     const {pagination, loadPage} = useContext(PaginationContext);
     const controller = new ProductController();
 
@@ -27,7 +27,6 @@ export function CartItem({id, quantity}: CartItemProps){
     const item = pagination.content.find(item => item.productId === id);
     if(item == null) return null
 
-    const quantityFromCart = getItemQuantity(item.productId);
     return (
         <Stack direction="horizontal" gap={2} className="d-flex
         align-items-center">
