@@ -20,7 +20,8 @@ public class UserPostRequest {
 
     }
 
-    public UserPostRequest(String email, String password) {
+    public UserPostRequest(String email,
+                           String password) {
         this.email = email;
         this.password = password;
     }

@@ -23,7 +23,9 @@ public class OrdersRequest {
 
     }
 
-    public OrdersRequest(List<UUID> productsId, String email, Payment method) {
+    public OrdersRequest(List<UUID> productsId,
+                         String email,
+                         Payment method) {
         this.productsId = productsId;
         this.email = email;
         this.method = method;

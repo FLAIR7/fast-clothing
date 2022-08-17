@@ -18,7 +18,8 @@ public class UserPasswordRequest {
 
     }
 
-    public UserPasswordRequest(UUID userId, String password) {
+    public UserPasswordRequest(UUID userId,
+                               String password) {
         this.userId = userId;
         this.password = password;
     }

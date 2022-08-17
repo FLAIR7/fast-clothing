@@ -12,17 +12,16 @@ public class ProductResponse {
 
     private BigDecimal price;
 
-    private Integer quantity;
-
     public ProductResponse() {
 
     }
 
-    public ProductResponse(UUID productId, String name, BigDecimal price, Integer quantity) {
+    public ProductResponse(UUID productId,
+                           String name,
+                           BigDecimal price) {
         this.productId = productId;
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
     }
 
     public UUID getProductId() {
@@ -49,14 +48,6 @@ public class ProductResponse {
         this.price = price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,7 +67,6 @@ public class ProductResponse {
                 "productId=" + productId +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", quantity=" + quantity +
                 '}';
     }
 }

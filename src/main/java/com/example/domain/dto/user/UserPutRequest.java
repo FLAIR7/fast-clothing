@@ -19,7 +19,8 @@ public class UserPutRequest {
     public UserPutRequest() {
     }
 
-    public UserPutRequest(UUID userId, String email) {
+    public UserPutRequest(UUID userId,
+                          String email) {
         this.userId = userId;
         this.email = email;
     }

@@ -12,7 +12,8 @@ public class UserResponse {
 
     }
 
-    public UserResponse(UUID userId, String email) {
+    public UserResponse(UUID userId,
+                        String email) {
         this.userId = userId;
         this.email = email;
     }

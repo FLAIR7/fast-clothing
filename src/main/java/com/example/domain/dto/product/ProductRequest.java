@@ -15,13 +15,10 @@ public class ProductRequest {
     @NotNull
     private BigDecimal price;
 
-    @NotNull
-    private Integer quantity;
-
-    public ProductRequest(String name, BigDecimal price, Integer quantity){
+    public ProductRequest(String name,
+                          BigDecimal price){
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
     }
 
     public String getName() {
@@ -38,14 +35,6 @@ public class ProductRequest {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     @Override
@@ -66,7 +55,6 @@ public class ProductRequest {
         return "ProductRequest{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                ", quantity=" + quantity +
                 '}';
     }
 }

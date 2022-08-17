@@ -41,15 +41,6 @@ public class ProductService {
         return repository.findById(productId);
     }
 
-    @Transactional(readOnly = true)
-    public Product increaseInventoryAmount(Product product, Integer inventoryAmount){
-        if(0 >= inventoryAmount){
-            throw new ArithmeticException("Cannot increase by negatives or zero");
-        }
-        product.increaseInventoryAmount(inventoryAmount);
-        return repository.save(product);
-    }
-
     @Transactional
     public void deleteById(UUID productId){
         Optional<Product> optProduct = repository.findById(productId);

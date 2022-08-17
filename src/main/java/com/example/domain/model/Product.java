@@ -29,32 +29,26 @@ public class Product {
     @NotBlank
     private String name;
 
-    @DecimalMax("9999")
+    @DecimalMax("99")
     private BigDecimal price;
-
-    private Integer quantity;
 
     public Product(){
 
     }
 
-    public Product(
-                   String name,
-                   BigDecimal price,
-                   Integer quantity) {
+    public Product(String name,
+                   BigDecimal price) {
         this.name = name;
         this.price= price;
-        this.quantity = quantity;
+
     }
 
     public Product(UUID productId,
             String name,
-            BigDecimal price,
-            Integer quantity) {
+            BigDecimal price) {
         this.productId = productId;
         this.name = name;
         this.price= price;
-        this.quantity = quantity;
     }
 
     public UUID getProductId() {
@@ -81,18 +75,6 @@ public class Product {
         this.price = price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public void increaseInventoryAmount(Integer value){
-        this.quantity += value;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -111,7 +93,6 @@ public class Product {
         return "Product{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                ", quantity=" + quantity +
                 '}';
     }
 }

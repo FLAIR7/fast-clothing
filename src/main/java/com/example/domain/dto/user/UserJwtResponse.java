@@ -7,7 +7,8 @@ public class UserJwtResponse {
     private String email;
     private String token;
 
-    public UserJwtResponse(String email, String token) {
+    public UserJwtResponse(String email,
+                           String token) {
         this.email = email;
         this.token = token;
     }

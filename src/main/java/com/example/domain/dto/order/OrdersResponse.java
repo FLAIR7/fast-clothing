@@ -17,7 +17,9 @@ public class OrdersResponse {
     public OrdersResponse() {
     }
 
-    public OrdersResponse(UUID ordersId, List<Product> products, UserResponse user) {
+    public OrdersResponse(UUID ordersId,
+                          List<Product> products,
+                          UserResponse user) {
         this.ordersId = ordersId;
         this.products = products;
         this.user = user;
