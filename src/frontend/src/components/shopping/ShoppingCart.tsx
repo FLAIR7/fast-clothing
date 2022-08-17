@@ -9,6 +9,7 @@ import api from "../../services/api";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ToastContext} from "../../contexts/ToastContext";
+import { OrderContext, useOrder } from "../../contexts/OrderContext";
 
 interface ShoppingCartProps {
     isOpen: boolean
@@ -17,39 +18,12 @@ interface ShoppingCartProps {
 export function ShoppingCart({isOpen}: ShoppingCartProps){
     const {closeCart, cartItems} = useShoppingCart();
     const {pagination, loadPage} = useContext(PaginationContext);
-    // const {save, setThings} = useContext(OrderContext);
-    const {user} = useContext(AuthContext);
+    const {saveOrder} = useOrder();
     const controller = new ProductController();
 
-    const history = useNavigate();
-    const {addToast} = useContext(ToastContext);
-
-    function orders(){
-
-        if(user === null || user === undefined) {
-            history('/login');
-            closeCart();
-        } else {
-            const token = JSON.parse(localStorage.getItem("@FastCloth:auth_token") || "");
-            const order = {
-                "productsId":
-                    cartItems.map(item => item.id),
-                "email": Object.values(user)[0],
-                "method": 1
-            }
-            api.post("/orders", order, {headers: {"Authorization": `Bearer ${token}`}})
-                .then(() => {
-                    addToast({
-                        type: 'success',
-                        title: 'Order successful',
-                        description: 'Your products will arrive in 1 minute'
-                    }); 
-                    alert('Your products will arrive in 1 minute');                
-                }).catch(err => {
-                    console.log(err);
-                })
-        }
-    }
+    const cartIds = cartItems.map(function(o, i) {
+        return o.id
+    })
 
     useEffect(() => {
         loadPage(controller);
@@ -75,7 +49,7 @@ export function ShoppingCart({isOpen}: ShoppingCartProps){
                         )}
                     </div>
                 </Stack>
-                <Button onClick={() => orders()}>SHOP NOW!</Button>
+                <Button onClick={() => saveOrder(cartIds)}>SHOP NOW!</Button>
             </Offcanvas.Body>
         </Offcanvas>
     );

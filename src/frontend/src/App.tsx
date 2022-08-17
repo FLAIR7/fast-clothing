@@ -19,12 +19,15 @@ function App() {
              <LoginProvider>
                <RegisterProvider>
                 <PaginationProvider>
-                  <OrderProvider>
-                    <ShoppingCartProvider>
-                      <Navbar/>
-                      <Pages/>
-                    </ShoppingCartProvider>
+                <OrderProvider>
+
+                  <ShoppingCartProvider>
+
+                        <Navbar/>
+                        <Pages/>
+                  </ShoppingCartProvider>
                   </OrderProvider>
+
                 </PaginationProvider>
               </RegisterProvider>
             </LoginProvider>
