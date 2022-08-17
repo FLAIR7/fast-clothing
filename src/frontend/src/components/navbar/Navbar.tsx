@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Container,Nav, Navbar as NavbarBs} from "react-bootstrap";
 import { NavLink } from 'react-router-dom';
 import { useShoppingCart } from '../../contexts/ShoppingCartContext';
 import { HomeOutlined } from '@material-ui/icons';
+import { AuthContext } from '../../contexts/AuthContext';
 
 
 export function Navbar(){
   const {openCart, cartQuantity} = useShoppingCart();
+  const {user} = useContext(AuthContext);
+  let username = null;
+  if(user) {
+    username = Object.values(user)[0].split("@")[0];
+  } 
+
   return (
     <NavbarBs sticky="top" className="bg-white shadow-sm mb-3">
       <Container>
         <NavbarBs.Brand>Fast Clothing</NavbarBs.Brand>
+        {user === null || user === undefined ? (
         <Nav>
           <Nav.Link to="/" as={NavLink}>
             <HomeOutlined/>
@@ -20,9 +28,18 @@ export function Navbar(){
           </Nav.Link>
           <Nav.Link to="/register" as={NavLink}>
             Register
-          </Nav.Link>
+          </Nav.Link>  
         </Nav>
-        {cartQuantity > 0 && (
+
+        ) : (
+        <Nav>
+          <Nav.Link to="/" as={NavLink}>
+            <HomeOutlined/>
+          </Nav.Link>
+          <NavbarBs.Brand>Hi, {username}</NavbarBs.Brand>
+        </Nav>
+        
+        )}
         <Button onClick={openCart} 
         style={{width: "3rem", height: "3rem", position: "relative"}} 
         variant="outline-primary" className="rounded-circle">
@@ -45,7 +62,7 @@ export function Navbar(){
             {cartQuantity}
           </div>
         </Button>
-        )}
+        
       </Container>
     </NavbarBs>
   )

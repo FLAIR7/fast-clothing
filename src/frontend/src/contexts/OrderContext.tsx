@@ -1,10 +1,9 @@
-import React, { createContext, ReactNode, useCallback, useContext, useState } from 'react'
+import React, { createContext, ReactNode, useContext, useState } from 'react'
 import api from '../services/api';
 import { OrderRequestBody } from '../types/productTypes';
 import { ToastContext } from './ToastContext';
 import {useNavigate} from "react-router-dom";
 import { AuthContext } from './AuthContext';
-import { useShoppingCart } from './ShoppingCartContext';
 
 interface OrderProviderProps {
     children: ReactNode;
@@ -65,8 +64,7 @@ export function OrderProvider({children}: OrderProviderProps){
                     title: "Error in order",
                     description: "Something went wrong while make your order"
                 });
-            })
-        
+            })   
     }
 
     return (

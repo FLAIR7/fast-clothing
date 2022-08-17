@@ -5,11 +5,7 @@ import { useShoppingCart } from "../../contexts/ShoppingCartContext";
 import ProductController from "../../controllers/productController";
 import { CartItem } from "../cart-item/CartItem";
 import { formatCurrency } from "../../utils/formatCurrency";
-import api from "../../services/api";
-import { AuthContext } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { ToastContext} from "../../contexts/ToastContext";
-import { OrderContext, useOrder } from "../../contexts/OrderContext";
+import { useOrder } from "../../contexts/OrderContext";
 
 interface ShoppingCartProps {
     isOpen: boolean

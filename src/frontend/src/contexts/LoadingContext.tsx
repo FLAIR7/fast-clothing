@@ -13,7 +13,6 @@ interface LoadingContextData {
     clearLoading: () => void
 }
 
-
 export const LoadingContext = createContext<LoadingContextData>({} as LoadingContextData);
 
 export function LoadingProvider({children}: LoadingProviderProps) {

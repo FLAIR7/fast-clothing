@@ -20,7 +20,6 @@ type ShoppingCartContext = {
     removeFromCart: (id: string) => void
     cartQuantity: number
     cartItems: CartItem[]
-
 }
 
 const ShoppingCartContext = createContext({} as 

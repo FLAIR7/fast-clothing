@@ -16,22 +16,19 @@ function App() {
       <>
         <ToastProvider>
            <AuthProvider>
-             <LoginProvider>
-               <RegisterProvider>
-                <PaginationProvider>
-                <OrderProvider>
-
-                  <ShoppingCartProvider>
-
-                        <Navbar/>
-                        <Pages/>
-                  </ShoppingCartProvider>
-                  </OrderProvider>
-
-                </PaginationProvider>
-              </RegisterProvider>
-            </LoginProvider>
-          </AuthProvider>
+              <LoginProvider>
+                 <RegisterProvider>
+                    <PaginationProvider>
+                       <OrderProvider>
+                          <ShoppingCartProvider>
+                             <Navbar/>
+                             <Pages/>
+                          </ShoppingCartProvider>
+                       </OrderProvider>
+                    </PaginationProvider>
+                </RegisterProvider>
+             </LoginProvider>
+           </AuthProvider>
         </ToastProvider>
       </>
   );
