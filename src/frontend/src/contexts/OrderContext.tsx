@@ -4,6 +4,7 @@ import { OrderRequestBody } from '../types/productTypes';
 import { ToastContext } from './ToastContext';
 import {useNavigate} from "react-router-dom";
 import { AuthContext } from './AuthContext';
+import Swal from 'sweetalert2';
 
 interface OrderProviderProps {
     children: ReactNode;
@@ -28,7 +29,7 @@ export function OrderProvider({children}: OrderProviderProps){
     const [email] = useState<string>('');
     const [method] = useState<number>(1);
 
-    const {user} = useContext(AuthContext);
+    const {user, signOut} = useContext(AuthContext);
     const {addToast} = useContext(ToastContext);
 
     const history = useNavigate();
@@ -36,12 +37,12 @@ export function OrderProvider({children}: OrderProviderProps){
     function saveOrder(items: string[]) {
         if(user === null || user === undefined) {
             history("/login");
-            addToast({
-                type: 'info',
-                title: "Must Login",
-                description: "You must login to buy!"
+            Swal.fire({
+                heightAuto: false,
+                icon: 'error',
+                title: 'Must Login',
+                text: "You must login to buy!"
             })
-            alert('You must login to buy!');
             return;
         }
         const orderToBeSaved: OrderRequestBody = {
@@ -52,18 +53,21 @@ export function OrderProvider({children}: OrderProviderProps){
         const token = JSON.parse(localStorage.getItem("@FastCloth:auth_token") || "");
         api.post('/orders', orderToBeSaved, {headers: {"Authorization": `Bearer ${token}`}})
             .then(() => {
-                addToast({
-                    type: 'success',
-                    title: "Order Successful",
-                    description: "Your Products will arrive in 1 minute!"
-                });
-                alert('Your Products will arrive in 1 minute!');
+                Swal.fire({
+                    heightAuto: false,
+                    icon: 'success',
+                    title: 'Order made!',
+                    text: "Your Products will arrive in 1 minute!"
+                })
             }).catch(err => {
-                addToast({
-                    type: "error",
-                    title: "Error in order",
-                    description: "Something went wrong while make your order"
-                });
+                Swal.fire({
+                    heightAuto: false,
+                    icon: 'error',
+                    title: 'Error in order',
+                    text: "Sign out..."
+                })
+                console.log(err);
+                signOut();
             })   
     }
 

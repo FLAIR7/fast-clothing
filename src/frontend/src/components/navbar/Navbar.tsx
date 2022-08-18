@@ -9,10 +9,10 @@ import { AuthContext } from '../../contexts/AuthContext';
 export function Navbar(){
   const {openCart, cartQuantity} = useShoppingCart();
   const {user} = useContext(AuthContext);
-  let username = null;
-  if(user) {
-    username = Object.values(user)[0].split("@")[0];
-  } 
+  let username = user ? Object.values(user)[0].split("@")[0] : null;
+  // if(user) {
+  //   username = Object.values(user)[0].split("@")[0];
+  // } 
 
   return (
     <NavbarBs sticky="top" className="bg-white shadow-sm mb-3">

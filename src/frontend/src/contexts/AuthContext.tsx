@@ -50,8 +50,8 @@ export function AuthProvider({children}: AuthProviderProps) {
     }, []);
 
     const signOut = useCallback(() => {
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('user');
+        localStorage.removeItem('@FastCloth:auth_token');
+        localStorage.removeItem('@FastCloth:user');
         setData({} as AuthState)
     }, [])
 
