@@ -4,11 +4,12 @@ import { NavLink } from 'react-router-dom';
 import { useShoppingCart } from '../../contexts/ShoppingCartContext';
 import { HomeOutlined } from '@material-ui/icons';
 import { AuthContext } from '../../contexts/AuthContext';
+import { LogoutContext } from '../../contexts/LogoutContext';
 
 
 export function Navbar(){
   const {openCart, cartQuantity} = useShoppingCart();
-  const {user} = useContext(AuthContext);
+  const {user, signOut} = useContext(AuthContext);
   let username = user ? Object.values(user)[0].split("@")[0] : null;
   // if(user) {
   //   username = Object.values(user)[0].split("@")[0];
@@ -18,28 +19,29 @@ export function Navbar(){
     <NavbarBs sticky="top" className="bg-white shadow-sm mb-3">
       <Container>
         <NavbarBs.Brand>Fast Clothing</NavbarBs.Brand>
-        {user === null || user === undefined ? (
         <Nav>
-          <Nav.Link to="/" as={NavLink}>
-            <HomeOutlined/>
-          </Nav.Link>
-          <Nav.Link to="/login" as={NavLink}>
-            Login
-          </Nav.Link>
-          <Nav.Link to="/register" as={NavLink}>
-            Register
-          </Nav.Link>  
-        </Nav>
-
-        ) : (
-        <Nav>
-          <Nav.Link to="/" as={NavLink}>
-            <HomeOutlined/>
-          </Nav.Link>
-          <NavbarBs.Brand>Hi, {username}</NavbarBs.Brand>
-        </Nav>
+          {user === null || user === undefined ? (
+          <Nav>
+            <Nav.Link to="/" as={NavLink}>
+              <HomeOutlined/>
+            </Nav.Link>
+            <Nav.Link to="/login" as={NavLink}>
+              Login
+            </Nav.Link>
+            <Nav.Link to="/register" as={NavLink}>
+              Register
+            </Nav.Link>  
+          </Nav>
+          ) : (
+          <Nav>
+            <Nav.Link onClick={() => signOut()}>
+              Logout
+            </Nav.Link>
+            <NavbarBs.Brand>Hi, {username}</NavbarBs.Brand>
+          </Nav>
+          
+          )}
         
-        )}
         <Button onClick={openCart} 
         style={{width: "3rem", height: "3rem", position: "relative"}} 
         variant="outline-primary" className="rounded-circle">
@@ -62,6 +64,7 @@ export function Navbar(){
             {cartQuantity}
           </div>
         </Button>
+      </Nav>
         
       </Container>
     </NavbarBs>

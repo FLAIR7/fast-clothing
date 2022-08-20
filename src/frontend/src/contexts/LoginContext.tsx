@@ -1,4 +1,5 @@
 import React, {createContext, ReactNode, useContext, useState, useCallback} from 'react'
+import { useNavigate } from 'react-router-dom';
 import { UserPostRequest } from '../types/types';
 import { validateLogin } from '../validations/userValidation';
 import { AuthContext } from './AuthContext';
@@ -26,6 +27,8 @@ export function LoginProvider({children}: LoginContextProviderProps) {
     const {signIn} = useContext(AuthContext);
     const {addToast} = useContext(ToastContext);
 
+    const history = useNavigate();
+
     const login = useCallback(async () => {
         const user: UserPostRequest = {
             email: email,
@@ -38,6 +41,7 @@ export function LoginProvider({children}: LoginContextProviderProps) {
                     title: 'Welcome!',
                     description: 'Sign in successfuly'
                 });
+                history("/");
             }).catch(err => {
                 addToast({
                     type: 'error',
