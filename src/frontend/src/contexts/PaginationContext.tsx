@@ -2,6 +2,8 @@ import { createContext, ReactNode, useCallback, useContext, useState } from "rea
 import { Page, Pageable} from "../types/pageTypes"
 import { createAnEmptyPagination } from "../utils/createAnEmptyPaginatio";
 import { ToastContext } from "./ToastContext";
+import data from "../item.json";
+
 
 interface PaginationProviderProps {
     children: ReactNode;
@@ -32,6 +34,13 @@ export function PaginationProvider({children}: PaginationProviderProps) {
     const [order, setOrder] = useState<'asc' | 'desc'>('asc');
     
     const {addToast} = useContext(ToastContext);
+
+    let i = 0;
+
+    for(const elements of pagination.content) {
+        elements.img = data[i].img;
+        i++;
+    }
 
     const loadPage = useCallback(async (controller: Pageable) => {
         await controller.getPageable(0, sort, order, size).then((response) => {

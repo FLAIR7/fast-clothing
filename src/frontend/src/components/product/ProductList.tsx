@@ -4,7 +4,6 @@ import { useContext, useEffect} from "react";
 import { ProductResponseBody } from "../../types/productTypes";
 import { StoreItem } from "./StoreItem";
 import styled from "styled-components";
-import data from "../../item.json";
 import LoadingSpinner from "../spinner/LoadingSpinner";
 
 
@@ -31,13 +30,6 @@ export default function ProductList({controller}: Props){
     useEffect(() => {
         loadPage(controller);
     }, [loadPage])
-
-    let i = 0;
-
-    for(const elements of pagination.content) {
-        elements.img = data[i].img;
-        i++;
-    }
 
     return (
         <Container>
