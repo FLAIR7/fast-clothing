@@ -30,7 +30,7 @@ export default function LoginPage() {
 
     return(
         <Constainer>
-            <FormContainer className={classes.root}>
+            <FormContainer className={classes.root} onSubmit={login}>
                 <Headline>Already have an account?</Headline>
                 <Text>Login with your e-mail and password</Text>
                 <TextField
@@ -40,6 +40,7 @@ export default function LoginPage() {
                     variant="outlined"
                     onChange={handleEmailChange}
                     value={email}
+                    onSubmit={login}
                 />
                 <TextField 
                     id="password"
@@ -48,6 +49,7 @@ export default function LoginPage() {
                     variant="outlined"
                     onChange={handlePasswordChange}
                     value={password}
+                    onSubmit={login}
                 />
                 <Button type="button" onClick={login} variant="contained" color="primary">
                     Login
