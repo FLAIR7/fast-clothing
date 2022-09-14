@@ -49,7 +49,7 @@ export default function LoginPage() {
                     onChange={handlePasswordChange}
                     value={password}
                 />
-                <Button onClick={login} variant="contained" color="primary">
+                <Button type="button" onClick={login} variant="contained" color="primary">
                     Login
                 </Button>
             </FormContainer>
