@@ -40,7 +40,6 @@ export default function LoginPage() {
                     variant="outlined"
                     onChange={handleEmailChange}
                     value={email}
-                    onSubmit={login}
                 />
                 <TextField 
                     id="password"
@@ -49,7 +48,6 @@ export default function LoginPage() {
                     variant="outlined"
                     onChange={handlePasswordChange}
                     value={password}
-                    onSubmit={login}
                 />
                 <Button type="button" onClick={login} variant="contained" color="primary">
                     Login
