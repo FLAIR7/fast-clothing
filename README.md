@@ -74,5 +74,3 @@ yarn start
 ## 📝 License
 
 This project is under MIT license.
-
-Vini Sousa
