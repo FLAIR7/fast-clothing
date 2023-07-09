@@ -76,6 +76,3 @@ yarn start
 This project is under MIT license.
 
 Vini Sousa
-
-https://www.linkedin.com/in/vinicius-sousa-7630a21a4/
-
